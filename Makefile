@@ -18,13 +18,13 @@ makelib:
 	@make -C ${LIBFT}
 
 ${NAME}: ${OBJS}
-	${CC} ${CFLAGS} ${LIB} -o $@ $^ 
+	${CC} ${CFLAGS} -o $@ $<  ${LIB} ${INCLUDES}
 	@echo "so_long created"
 
 ${OBJ_DIR}/%.o: %.c
 	@mkdir -p ${OBJ_DIR}
 	@echo create: ${@:%=%}
-	@${CC} ${CFLAGS} -g -o $@ $< ${INCLUDES}
+	@${CC} ${CFLAGS} -o $@ -c $< ${INCLUDES}
 
 clean:
 	@${RM} ${OBJ_DIR}

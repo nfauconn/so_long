@@ -50,22 +50,22 @@ rev_int_tab.c \
 sort_int_tab.c \
 str_isdigit.c \
 strfjoinchar.c \
-conv_c.c\
-conv_s.c\
-conv_p.c\
-conv_d_i.c\
-conv_u.c\
-conv_x.c\
-conv_mx.c\
-conv_percent.c\
-convert.c\
-fill_nb.c\
-ft_isflagpf.c\
-ft_printf.c\
-init_printf.c\
-insert_into_buffer.c\
-main_loop.c\
-parse_printf.c\
+pf_conv_c.c\
+pf_conv_s.c\
+pf_conv_p.c\
+pf_conv_d_i.c\
+pf_conv_u.c\
+pf_conv_x.c\
+pf_conv_mx.c\
+pf_conv_percent.c\
+pf_convert.c\
+pf_fill_nb.c\
+pf_isflag.c\
+pf_ft_printf.c\
+pf_init.c\
+pf_insert_into_buffer.c\
+pf_main_loop.c\
+pf_parse_printf.c\
 
 OBJS = ${addprefix ${OBJ_DIR}/,${SRC:.c=.o}}
 SRC_DIR  = ./srcs
@@ -74,7 +74,7 @@ OBJ_DIR  = ./objs
 all : ${NAME}
 
 ${NAME}: ${OBJS}
-	@ar rc ${NAME} ${OBJS}
+	@ar -rc ${NAME} ${OBJS}
 	@ranlib ${NAME}
 	@echo "lib created"
 
