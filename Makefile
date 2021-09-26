@@ -18,7 +18,7 @@ makelib:
 	@make -C ${LIBFT}
 
 ${NAME}: ${OBJS}
-	${CC} ${CFLAGS} -o $@ $<  ${LIB} ${INCLUDES}
+	@${CC} ${CFLAGS} -no-pie -o $@ $<  ${LIB} ${INCLUDES}
 	@echo "so_long created"
 
 ${OBJ_DIR}/%.o: %.c
