@@ -10,8 +10,9 @@ MLX_FLAGS = -lm -lmlx -lXext -lX11
 INCLUDES = -I includes -I libft/includes -I mlx
 COMP = ${CC} ${CFLAGS}
 RM	 = rm -rf
-SRCS = main.c 
+SRCS = error.c hooks.c main.c start.c
 OBJS = ${addprefix ${OBJ_DIR}/,${SRCS:.c=.o}}
+
 
 ${OBJ_DIR}/%.o: %.c
 	@mkdir -p ${OBJ_DIR}

@@ -1,4 +1,5 @@
 NAME = libft.a
+OS    = $(shell uname)
 CC	 = clang
 SRC_DIR  = ./srcs
 OBJ_DIR  = ./objs
