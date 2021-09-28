@@ -6,25 +6,32 @@ t_image	ft_new_sprite(void *mlx, char *path)
 
 	img.ptr = mlx_xpm_file_to_image(mlx, path, &img.size.x, &img.size.y);
 	img.addr  = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_size, &img.endian);
-/*	img.ratio = img.size.y / img.size.x;
-	img.size.x /= 2;
-	img.size.y /= (2 * img.ratio);
-	img.addr  = mlx_get_data_addr(img.ptr, &img.bits_per_pixel, &img.line_size, &img.endian);
-*/	return (img);
+	return (img);
 }
 
-void	start(t_var *var)
+void	start(t_game *game)
 {
-	var->mlx_ptr = mlx_init();
-	if (!var->mlx_ptr)
+	game->mlx = mlx_init();
+	if (!game->mlx)
 		error("failed to initialize mlx");
-	var->window = mlx_new_window(var->mlx_ptr, 1280, 720, "so_long");
-	
-	var->sprite = ft_new_sprite(var->mlx_ptr, "./puck.xpm");
-	var->sprite_position.x = 0;
-	var->sprite_position.y = 0;
-	mlx_put_image_to_window(var->mlx_ptr, var->window, var->sprite.ptr, var->sprite_position.x, var->sprite_position.y);
-	mlx_hook(var->window, 17, 0, close_w, var);
-	mlx_key_hook(var->window, *key_hooked, var);
-	mlx_loop_hook(var->mlx_ptr, *ft_update, var);
+	game->window = mlx_new_window(game->mlx, 1280, 720, "so_long");
+
+	game->avatar = ft_new_sprite(game->mlx, "./puck.xpm");
+	game->avatar.position.x = 0;
+	game->avatar.position.y = 0;
+	mlx_put_image_to_window(game->mlx, game->window, game->avatar.ptr, game->avatar.position.x, game->avatar.position.y);
+	game->collectable = ft_new_sprite(game->mlx, "./snail.xpm");
+	game->collectable.position.x = 120;
+	game->collectable.position.y = 120;
+	mlx_put_image_to_window(game->mlx, game->window, game->collectable.ptr, game->collectable.position.x, game->collectable.position.y);
+	game->ennemy = ft_new_sprite(game->mlx, "./ennemy.xpm");
+	game->ennemy.position.x = 200;
+	game->ennemy.position.y = 220;
+	mlx_put_image_to_window(game->mlx, game->window, game->ennemy.ptr, game->ennemy.position.x, game->ennemy.position.y);
+
+
+	mlx_hook(game->window, 17, 0, close_w, game);
+
+	mlx_key_hook(game->window, key_hooked, game);
+	mlx_loop_hook(game->mlx, ft_update, game);
 }

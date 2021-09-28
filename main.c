@@ -2,9 +2,9 @@
 
 int main()
 {
-	t_var	var;
+	t_game	game;
 
-	start(&var);
-	mlx_loop(var.mlx_ptr);
+	start(&game);
+	mlx_loop(game.mlx);
 	return (0);
 }

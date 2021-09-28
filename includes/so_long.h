@@ -41,25 +41,27 @@ typedef struct	s_image
 {
 	void		*ptr;
 	t_vector	size;
+	t_vector	position;
 	char		*addr;
 	int			bits_per_pixel;
 	int			line_size;
 	int			endian;
-	int			ratio;
 }   t_image;
 
-typedef struct  s_variables
+typedef struct  s_game
 {
-	void		*mlx_ptr;
+	void		*mlx;
 	void		*window;
-	t_image		sprite;
-	t_vector	sprite_position;
-}	t_var;
+	t_image		avatar;
+	t_image		collectable;
+	t_image		ennemy;
+}	t_game;
 
-int			close_w(t_var *var);
-int	ft_update(t_var *var);
+int			close_w(t_game *game);
+t_image	ft_new_avatar(void *mlx, char *path);
+int	ft_update(t_game *game);
 void		error(char *s);
-int			key_hooked(int	keycode, t_var *var);
-void		start(t_var *var);
+int			key_hooked(int	keycode, t_game *game);
+void		start(t_game *game);
 
 #endif

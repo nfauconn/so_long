@@ -1,41 +1,50 @@
 #include "so_long.h"
 
-int	close_w(t_var *var)
+int	close_w(t_game *game)
 {
-	mlx_destroy_window(var->mlx_ptr, (void *)var->window);
+	mlx_destroy_window(game->mlx, (void *)game->window);
 	exit(0);
 	return (0);
 }
 
-int	key_hooked(int key, t_var *var)
+int	key_hooked(int key, t_game *game)
 {
 	ft_printf("keycode = %d\n", key);
 	if (key == ECHAP)
-		close_w(var);
-	else if (key == UP)
-		var->sprite_position.y += var->sprite.size.y;
+		close_w(game);
+	mlx_clear_window(game->mlx, game->window);
+	if (key == UP)
+		game->avatar.position.y -= game->avatar.size.y;
 	else if (key == LEFT)
-		var->sprite_position.x -= var->sprite.size.x;
+		game->avatar.position.x -= game->avatar.size.x;
 	else if (key == DOWN)
-		var->sprite_position.y += var->sprite.size.y;
+		game->avatar.position.y += game->avatar.size.y;
 	else if (key == RIGHT)
-		var->sprite_position.x += var->sprite.size.x;
-	mlx_put_image_to_window(var->mlx_ptr, var->window, var->sprite.ptr, var->sprite_position.x, var->sprite_position.y);
+		game->avatar.position.x += game->avatar.size.x;
+//	mlx_put_image_to_window(game->mlx, game->window, game->avatar.ptr, game->avatar.position.x, game->avatar.position.y);
 	return (0);
 }
 
-int	ft_update(t_var *var)
+int	ft_update(t_game *game)
 {
 	static int	frame;
 
 	frame++;
-	if (frame == 200)
-		var->sprite_position.y += 1;
-	else if (frame >= 200 * 2)
+	if (frame == 2000)
 	{
-		var->sprite_position.y -= 1;
+		game->collectable.position.y += 1;
+		game->avatar.position.y += 1;
+		game->ennemy.position.y += 1;
+	}
+	else if (frame >= 2000 * 2)
+	{
+		game->collectable.position.y -= 1;
+		game->avatar.position.y -= 1;
+		game->ennemy.position.y -= 1;
 		frame = 0;
 	}
-	mlx_put_image_to_window(var->mlx_ptr, var->window, var->sprite.ptr, var->sprite_position.x, var->sprite_position.y);
+	mlx_put_image_to_window(game->mlx, game->window, game->avatar.ptr, game->avatar.position.x, game->avatar.position.y);
+	mlx_put_image_to_window(game->mlx, game->window, game->collectable.ptr, game->collectable.position.x, game->collectable.position.y);
+	mlx_put_image_to_window(game->mlx, game->window, game->ennemy.ptr, game->ennemy.position.x, game->ennemy.position.y);
 	return (0);
 }
