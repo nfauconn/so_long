@@ -10,7 +10,7 @@ MLX_FLAGS = -lm -lmlx -lXext -lX11
 INCLUDES = -I includes -I libft/includes -I mlx
 COMP = ${CC} ${CFLAGS}
 RM	 = rm -rf
-SRCS = error.c hooks.c main.c start.c
+SRCS = color.c error.c hooks.c main.c start.c
 OBJS = ${addprefix ${OBJ_DIR}/,${SRCS:.c=.o}}
 
 
@@ -34,6 +34,9 @@ val: ${NAME}
 	--track-fds=yes \
 	--errors-for-leak-kinds=all \
 	--show-leak-kinds=all ./${NAME}
+
+exe: ${NAME}
+	./${NAME}
 
 clean:
 	@make clean -C libft

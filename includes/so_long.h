@@ -39,12 +39,13 @@ typedef struct s_color
 
 typedef struct	s_image
 {
-	void      *ptr;
-	t_vector  size;
-	char      *pixels;
-	int       bits_per_pixel;
-	int       line_size;
-	int       endian;
+	void		*ptr;
+	t_vector	size;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_size;
+	int			endian;
+	int			ratio;
 }   t_image;
 
 typedef struct  s_variables
@@ -56,6 +57,7 @@ typedef struct  s_variables
 }	t_var;
 
 int			close_w(t_var *var);
+int	ft_update(t_var *var);
 void		error(char *s);
 int			key_hooked(int	keycode, t_var *var);
 void		start(t_var *var);
