@@ -23,6 +23,11 @@ static t_bool	alloc_lines(char *file, t_game *game)
 	}
 	close(fd);
 	game->map = (char **)malloc(sizeof(char *) * nb_lines);
+/*	while (*game->map)
+	{
+		*game->map = NULL;
+		game->map++;
+	}*/
 	ft_printf("nb_lines : %d\n", nb_lines);
 	if (!game->map)
 		error("malloc failure on alloc_colums");
@@ -33,7 +38,7 @@ static void	fill_map(t_game *game, char *file)
 {
 	int		fd;
 	int		ret_gnl;
-	char	*line;
+	char	**line;
 	int		y;
 
 	y = 0;
@@ -42,11 +47,12 @@ static void	fill_map(t_game *game, char *file)
 	ret_gnl = 1;
 	while (ret_gnl > 0)
 	{
-		ret_gnl = get_next_line(fd, &line);
-		if (line != NULL && ft_strlen(line) > 0)
+		ret_gnl = get_next_line(fd, line);
+		if (line != NULL && ft_strlen(*line) > 0)
 		{
-			game->map[y] = ft_strdup(line);
-			free(&line);
+			game->map[y] = ft_strdup(*line);
+			free(line);
+			line = NULL;
 		}
 		y++;
 	}
@@ -61,5 +67,12 @@ t_bool	parse_map(int argc, char *file, t_game *game)
 	if (alloc_lines(file, game) == FAILURE)
 		error ("open or read error, please verify that file exists");
 	fill_map(game, file);
+
+	int	y = 0;
+	while (game->map[y])
+	{
+		ft_printf("line %d |%s|\n", y, game->map[y]);
+		y++;
+	}
 	return (SUCCESS);
 }
