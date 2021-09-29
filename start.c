@@ -14,7 +14,7 @@ void	start(t_game *game)
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		error("failed to initialize mlx");
-	game->window = mlx_new_window(game->mlx, 1280, 720, "so_long");
+	game->window = mlx_new_window(game->mlx, 500, 500, "so_long");
 
 	game->avatar = ft_new_sprite(game->mlx, "./puck.xpm");
 	game->avatar.position.x = 0;
@@ -24,10 +24,6 @@ void	start(t_game *game)
 	game->collectable.position.x = 120;
 	game->collectable.position.y = 120;
 	mlx_put_image_to_window(game->mlx, game->window, game->collectable.ptr, game->collectable.position.x, game->collectable.position.y);
-	game->ennemy = ft_new_sprite(game->mlx, "./ennemy.xpm");
-	game->ennemy.position.x = 200;
-	game->ennemy.position.y = 220;
-	mlx_put_image_to_window(game->mlx, game->window, game->ennemy.ptr, game->ennemy.position.x, game->ennemy.position.y);
 
 
 	mlx_hook(game->window, 17, 0, close_w, game);

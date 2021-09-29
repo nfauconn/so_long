@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/09/26 14:22:37 by user42           ###   ########.fr       */
+/*   Updated: 2021/09/29 19:53:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,76 +22,18 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include "ft_printf.h"
 
-# define BUFFER_SIZE 2048
-# define CONVFLAGS "cspdiuxX%-0.*123456789"
-# define CONV "cspdiuxX%"
-# define FLAGS "-0.*123456789"
-# define BUFFSIZE 3
-
-enum
-{
-	c = 0,
-	s,
-	p,
-	d,
-	i,
-	u,
-	x,
-	mx,
-	percent,
-};
+# define BUFFER_SIZE 100
 
 typedef unsigned long long	t_ull;
 
-typedef struct s_conv
+typedef struct s_list
 {
-	size_t	left;
-	size_t	zero_padded;
-	size_t	is_width;
-	size_t	width;
-	size_t	is_prec;
-	size_t	prec;
-	size_t	if_positive;
-	char	sign;
-	size_t	hashtag;
-	size_t	len;
-	char	*str;
-	size_t	nb_s;
-	size_t	nb_z;
-}				t_conv;
-
-typedef struct s_pf
-{
-	char	*format;
-	char	*buffer;
-	size_t	bufsize;
-	char	*ptr;
-	int		index_conv;
-	size_t	bufalloc;
-	void	(*fun_ptr[9])(va_list *, t_conv *);
-}				t_pf;
-
-int			ft_printf(const char *str, ...);
-void		init_pf(t_pf *pf, const char *format);
-void		init_conv(t_conv *conv);
-void		insert_into_buffer(t_pf *pf, char *insert, size_t len);
-void		convert(va_list *ap, t_pf *pf);
-void		conv_c(va_list *ap, t_conv *conv);
-void		conv_s(va_list *ap, t_conv *conv);
-void		conv_p(va_list *ap, t_conv *conv);
-void		conv_d_i(va_list *ap, t_conv *conv);
-void		conv_u(va_list *ap, t_conv *conv);
-void		conv_x(va_list *ap, t_conv *conv);
-void		conv_mx(va_list *ap, t_conv *conv);
-void		conv_percent(va_list *ap, t_conv *conv);
-void		spaces_zeros(t_conv *conv, size_t sign);
-void		fill_without_pw(t_conv *conv, char *str, size_t sign);
-void		fill_with_pw(t_conv *conv, const char *str, size_t sign);
-int			main_loop(t_pf *pf, va_list *ap);
-void		parse_flag(t_pf *pf, t_conv *conv, va_list *ap);
-int			parse_conv(t_pf *pf);
-void		convert(va_list *ap, t_pf *pf);
+	void			*content;
+	struct s_list	*prev;
+	struct s_list	*next;
+}				t_list;
 
 void		*ft_memset(void *b, int c, size_t len);
 void		ft_bzero(void *s, size_t n);
@@ -140,7 +82,10 @@ void		ft_putstr_fd(char *s, int fd);
 void		ft_putendl_fd(char *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
 int			*sort_int_tab(int *tab, int size);
+int	ft_strend_cmp(char *name, char *end);
 int			str_isdigit(char *str);
 void		rev_int_tab(int *tab, int size);
+int	get_next_line(int fd, char **line);
+
 
 #endif

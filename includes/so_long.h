@@ -51,17 +51,19 @@ typedef struct	s_image
 typedef struct  s_game
 {
 	void		*mlx;
+	char		**map;
 	void		*window;
 	t_image		avatar;
 	t_image		collectable;
-	t_image		ennemy;
 }	t_game;
 
 int			close_w(t_game *game);
 t_image	ft_new_avatar(void *mlx, char *path);
 int	ft_update(t_game *game);
+void	init_game_struct(t_game *game);
 void		error(char *s);
 int			key_hooked(int	keycode, t_game *game);
+t_bool	parse_map(int argc, char *file, t_game *game);
 void		start(t_game *game);
 
 #endif
