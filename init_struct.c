@@ -26,5 +26,5 @@ void	init_game_struct(t_game *game)
 	game->map = NULL;
 	game->window = NULL;
 	init_image(&game->avatar);
-	init_image(&game->collectable);
+	init_image(&game->item);
 }

@@ -13,17 +13,17 @@ void	start(t_game *game)
 {
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		error("failed to initialize mlx");
+		error("start : failed to initialize mlx");
 	game->window = mlx_new_window(game->mlx, 500, 500, "so_long");
 
 	game->avatar = ft_new_sprite(game->mlx, "./puck.xpm");
 	game->avatar.position.x = 0;
 	game->avatar.position.y = 0;
 	mlx_put_image_to_window(game->mlx, game->window, game->avatar.ptr, game->avatar.position.x, game->avatar.position.y);
-	game->collectable = ft_new_sprite(game->mlx, "./snail.xpm");
-	game->collectable.position.x = 120;
-	game->collectable.position.y = 120;
-	mlx_put_image_to_window(game->mlx, game->window, game->collectable.ptr, game->collectable.position.x, game->collectable.position.y);
+	game->item = ft_new_sprite(game->mlx, "./snail.xpm");
+	game->item.position.x = 120;
+	game->item.position.y = 120;
+	mlx_put_image_to_window(game->mlx, game->window, game->item.ptr, game->item.position.x, game->item.position.y);
 
 
 	mlx_hook(game->window, 17, 0, close_w, game);

@@ -1,5 +1,27 @@
 #include "so_long.h"
 
+static void	fill_map(t_game *game, char *file)
+{
+	int		fd;
+	int		ret_gnl;
+	char	*line;
+	int		y;
+
+	y = 0;
+	line = NULL;
+	fd = open(file, O_RDONLY);
+	ret_gnl = 1;
+	while (ret_gnl > 0)
+	{
+		ret_gnl = get_next_line(fd, &line);
+		game->map[y] = ft_strdup(line);
+		y++;
+		free(line);
+		line = NULL;
+	}
+	game->map[y] = 0;
+}
+
 static t_bool	alloc_lines(char *file, t_game *game)
 {
 	int		fd;
@@ -23,39 +45,9 @@ static t_bool	alloc_lines(char *file, t_game *game)
 	}
 	close(fd);
 	game->map = (char **)malloc(sizeof(char *) * nb_lines);
-/*	while (*game->map)
-	{
-		*game->map = NULL;
-		game->map++;
-	}*/
-	ft_printf("nb_lines : %d\n", nb_lines);
 	if (!game->map)
 		error("malloc failure on alloc_colums");
 	return (SUCCESS);
-}
-
-static void	fill_map(t_game *game, char *file)
-{
-	int		fd;
-	int		ret_gnl;
-	char	**line;
-	int		y;
-
-	y = 0;
-	line = NULL;
-	fd = open(file, O_RDONLY);
-	ret_gnl = 1;
-	while (ret_gnl > 0)
-	{
-		ret_gnl = get_next_line(fd, line);
-		if (line != NULL && ft_strlen(*line) > 0)
-		{
-			game->map[y] = ft_strdup(*line);
-			free(line);
-			line = NULL;
-		}
-		y++;
-	}
 }
 
 t_bool	parse_map(int argc, char *file, t_game *game)
@@ -63,16 +55,16 @@ t_bool	parse_map(int argc, char *file, t_game *game)
 	if (argc != 2)
 		error("invalid number of arg, must be 2 : <pgm> <map>");
 	if (!ft_strend_cmp(file, ".ber"))
-		error("invalid format for the map\nmust be .ber");
+		error("invalid format for the map : please use *.ber");
 	if (alloc_lines(file, game) == FAILURE)
-		error ("open or read error, please verify that file exists");
+		error ("wrong fd : please verify that file exists / is not a directory");
 	fill_map(game, file);
-
-	int	y = 0;
+	check_map(game);
+/*	int	y = 0;
 	while (game->map[y])
 	{
 		ft_printf("line %d |%s|\n", y, game->map[y]);
 		y++;
 	}
-	return (SUCCESS);
+*/	return (SUCCESS);
 }
