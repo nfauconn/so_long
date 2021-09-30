@@ -64,6 +64,7 @@ void		error_free(t_game *game, char *s);
 void		free_map(t_game *game);
 t_image		ft_new_avatar(void *mlx, char *path);
 int			ft_update(t_game *game);
+void		get_positions(t_game *game);
 void		init_game_struct(t_game *game);
 int			key_hooked(int	keycode, t_game *game);
 t_bool		parse_map(int argc, char *file, t_game *game);

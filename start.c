@@ -11,14 +11,13 @@ t_image	ft_new_sprite(void *mlx, char *path)
 
 void	start(t_game *game)
 {
+	get_positions(game);
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		error("start : failed to initialize mlx");
 	game->window = mlx_new_window(game->mlx, 500, 500, "so_long");
 
 	game->avatar = ft_new_sprite(game->mlx, "./puck.xpm");
-	game->avatar.position.x = 0;
-	game->avatar.position.y = 0;
 	mlx_put_image_to_window(game->mlx, game->window, game->avatar.ptr, game->avatar.position.x, game->avatar.position.y);
 	game->item = ft_new_sprite(game->mlx, "./snail.xpm");
 	game->item.position.x = 120;

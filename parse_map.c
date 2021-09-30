@@ -60,11 +60,5 @@ t_bool	parse_map(int argc, char *file, t_game *game)
 		error ("wrong fd : please verify that file exists / is not a directory");
 	fill_map(game, file);
 	check_map(game);
-/*	int	y = 0;
-	while (game->map[y])
-	{
-		ft_printf("line %d |%s|\n", y, game->map[y]);
-		y++;
-	}
-*/	return (SUCCESS);
+	return (SUCCESS);
 }
