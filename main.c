@@ -8,8 +8,13 @@ int	main(int argc, char **argv)
 //	init_game_struct(&game);
 	if (parse_map(argc, argv[1], &game) == SUCCESS)
 	{
+		while (game.map)
+		{
+			ft_printf("|%s|\n", *game.map);
+			game.map++;
+		}
 		start(&game);
-		mlx_loop(game.mlx);
+//		mlx_loop(game.mlx);
 	}
 	return (0);
 }

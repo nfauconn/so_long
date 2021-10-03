@@ -23,25 +23,11 @@ typedef struct	s_vector
 	int	y;
 }	t_vector;
 
-typedef struct	s_window
-{
-	void		*ptr;
-	t_vector	size;
-}	t_window;
-
-typedef struct s_color
-{
-	int	r;
-	int g;
-	int b;
-	int a;
-}	t_color;
-
 typedef struct	s_image
 {
 	void		*ptr;
 	t_vector	size;
-	t_vector	position;
+	t_vector	pos;
 	char		*addr;
 	int			bits_per_pixel;
 	int			line_size;
@@ -52,17 +38,17 @@ typedef struct  s_game
 {
 	void		*mlx;
 	char		**map;
+	t_vector	map_size;
 	void		*window;
-	t_image		avatar;
-	t_image		item;
+	t_image		*player;
+//	t_image		*item;
 }	t_game;
 
 void		check_map(t_game *game);
 int			close_w(t_game *game);
 void		error(char *s);
 void		error_free(t_game *game, char *s);
-void		free_map(t_game *game);
-t_image		ft_new_avatar(void *mlx, char *path);
+void		free_game(t_game *game);
 int			ft_update(t_game *game);
 void		get_positions(t_game *game);
 void		init_game_struct(t_game *game);
