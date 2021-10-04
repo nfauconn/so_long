@@ -15,7 +15,7 @@ void	start(t_game *game)
 	get_positions(game);
 /*	game->mlx = mlx_init();
 	if (!game->mlx)
-		error("start : failed to initialize mlx");
+		error(game, "start : failed to initialize mlx");
 	game->window = mlx_new_window(game->mlx, 500, 500, "so_long");
 
 	game->player = ft_new_sprite(game->mlx, "./puck.xpm");

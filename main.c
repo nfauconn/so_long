@@ -5,10 +5,10 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-//	init_game_struct(&game);
-	parse_map(argc, argv[1], &game);
+	init_game_struct(&game);
+	parse_map(&game, argc, argv[1]);
 	if (!game.map)
-		error_free(&game, "map is empty");
+		error(&game, "map is empty");
 
 	int y = 0;
 	while (game.map[y])
@@ -19,5 +19,6 @@ int	main(int argc, char **argv)
 	ft_printf("game->map[%d] = |%s|\n", y, game.map[y]);
 	start(&game);
 //	mlx_loop(game.mlx);
+free_game(&game);
 	return (0);
 }

@@ -10,12 +10,12 @@ static void	fill_map(t_game *game, char *file)
 
 	y = 0;
 	ret_gnl = 1;
-	line = NULL;
 	fd = open(file, O_RDONLY);
+	line = NULL;
 	while (ret_gnl > 0)
 	{
 		ret_gnl = get_next_line(fd, &line);
-		game->map[y] = (char *)malloc(sizeof(char) * (ft_strlen(line) + 1));
+		game->map[y] = (char *)malloc(sizeof(char) * (game->map_size.x));
 		x = 0;
 		while (line[x])
 		{
@@ -35,36 +35,44 @@ static t_bool	count_lines(t_game *game, char *file)
 	int		fd;
 	int		ret;
 	char	c;
+	int		max_x;
 
 	fd = open(file, O_RDONLY);
 	if (!fd)
 		return (FAILURE);
+	max_x = 0;
 	game->map_size.y = 1;
 	while (1)
 	{
 		ret = read(fd, &c, 1);
+		max_x++;
 		if (ret == -1)
 			return (FAILURE);
 		if (ret == 0)
 			break ;
 		if (c == '\n')
+		{
+			if (max_x > game->map_size.x)
+				game->map_size.x = max_x;
+			max_x = 0;
 			game->map_size.y++;
+		}
 	}
 	close(fd);
 	return (SUCCESS);
 }
 
-void	parse_map(int argc, char *file, t_game *game)
+void	parse_map(t_game *game, int argc, char *file)
 {
 	if (argc != 2)
-		error("invalid number of arg, must be 2 : <pgm> <map>");
+		error(game, "invalid number of arg, must be 2 : <pgm> <map>");
 	if (!ft_strend_cmp(file, ".ber"))
-		error("invalid format for the map : please use *.ber");
+		error(game, "invalid format for the map : please use *.ber");
 	if (count_lines(game, file) == FAILURE)
-		error ("wrong fd : please verify that file exists / is not a directory");
+		error(game, "wrong fd : please verify that file exists / is not a directory");
 	game->map = (char **)malloc(sizeof(char *) * (game->map_size.y + 1));
 	if (!game->map)
-		error("malloc failure on alloc_colums");
+		error(game, "malloc failure on alloc_colums");
 	fill_map(game, file);
 	check_map(game, game->map);
 }
