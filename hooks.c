@@ -1,9 +1,25 @@
 #include "so_long.h"
 
+void	destroy_sprites(t_game *game)
+{
+	t_sprite_elem	*next_item;
+
+	mlx_destroy_image(game->mlx, game->floor->ptr);
+	mlx_destroy_image(game->mlx, game->player->ptr);
+	mlx_destroy_image(game->mlx, game->exit->ptr);
+	mlx_destroy_image(game->mlx, game->first_item->image->ptr);
+	next_item = game->first_item->next;
+	while (next_item != game->first_item)
+	{
+		mlx_destroy_image(game->mlx, next_item->image->ptr);
+		next_item = next_item->next;
+	}
+}
+
 int	close_w(t_game *game)
 {
-//	mlx_destroy_image(game->mlx, game->player->image->ptr);
-	mlx_destroy_window(game->mlx, (void *)game->window);
+	destroy_sprites(game);
+	mlx_destroy_window(game->mlx, game->window);
 	mlx_destroy_display(game->mlx);
 	mlx_loop_end(game->mlx);
 	free(game->mlx);

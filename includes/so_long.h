@@ -65,6 +65,7 @@ typedef struct s_game
 	char			**map;
 	void			*window;
 	t_vector		map_size;
+	int				tile_size;
 	t_vector		screen_res;
 	t_image			*floor;
 	t_image			*player;

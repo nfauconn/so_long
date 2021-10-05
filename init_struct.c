@@ -43,8 +43,8 @@ void	init_game_struct(t_game *game)
 		error(game, "malloc error in init_game_struct");
 */	game->mlx = NULL;
 	game->map = NULL;
-	game->map_size.x = 0;
-	game->map_size.y = 0;
+	init_vector(&game->map_size);
+	game->tile_size = 0;
 	game->window = NULL;
 	game->floor = init_image_struct();
 	if (!game->floor)
