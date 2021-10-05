@@ -1,9 +1,9 @@
 #include "so_long.h"
 
-static void free_sprite_list(t_sprite_list *list)
+static void free_sprite_list(t_sprite_elem *list)
 {
-	t_sprite_list	*tmp;
-	t_sprite_list	*to_free;
+	t_sprite_elem	*tmp;
+	t_sprite_elem	*to_free;
 
 	tmp = list->next;
 	while (tmp != list)
@@ -40,7 +40,7 @@ void	free_game(t_game *game)
 		free(game->player);
 	if (game->exit)
 		free(game->exit);
-	if (game->item)
-		free_sprite_list(game->item);
+	if (game->first_item)
+		free_sprite_list(game->first_item);
 	exit(0);
 }

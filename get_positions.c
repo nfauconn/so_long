@@ -2,24 +2,24 @@
 
 static void	insert_new_node(t_game *game, int count, int letter, t_vector pos)
 {
-	t_sprite_list	**last;
-	t_sprite_list	*new;
+	t_sprite_elem	**last;
+	t_sprite_elem	*new;
 
 	if (letter == 'C')
-		last = &game->item;
+		last = &game->first_item;
 	if (count == 1)
 	{
 		(*last)->image->pos = pos;
 		return ;
 	}
-	new = (t_sprite_list *)malloc(sizeof(t_sprite_list));
+	new = (t_sprite_elem *)malloc(sizeof(t_sprite_elem));
 	if (!new)
 		error(game, "malloc error in insert_new_node");
 	new->next = (*last);
 	new->prev = (*last)->prev;
 	(*last)->prev = new;
 	new->prev->next = new;
-	new->image = init_image();
+	new->image = init_image_struct();
 	new->image->pos = pos;
 }
 
@@ -93,9 +93,9 @@ void	get_positions(t_game *game)
 	ft_printf("player_pos = %d, %d\n", game->player->pos.x, game->player->pos.y);
 	ft_printf("exit_pos = %d, %d\n", game->exit->pos.x, game->exit->pos.y);
 
-	t_sprite_list *tmp;
-	tmp = game->item;
-	while (tmp->next != game->item)
+	t_sprite_elem *tmp;
+	tmp = game->first_item;
+	while (tmp->next != game->first_item)
 	{
 		ft_printf("item_pos = %d, %d\n", tmp->image->pos.x, tmp->image->pos.y);
 		tmp = tmp->next;
