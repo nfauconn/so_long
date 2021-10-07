@@ -1,19 +1,29 @@
 #include "so_long.h"
 
+static void	free_image(t_image *img)
+{
+	if (img->addr)
+		free(img->addr);
+	if (img->ptr)
+		free(img->ptr);
+	if (img)
+		free(img);
+}
+
 static void free_sprite_list(t_sprite_elem *list)
 {
 	t_sprite_elem	*tmp;
 	t_sprite_elem	*to_free;
 
-	tmp = list->next;
-	while (tmp != list)
+	tmp = list;
+	while (tmp != list->prev)
 	{
-		free(tmp->image);
+		free_image(tmp->image);
 		to_free = tmp;
 		tmp = tmp->next;
 		free(to_free);
 	}
-	free(tmp->image);
+	free_image(tmp->image);
 	free(tmp);
 }
 
@@ -29,17 +39,18 @@ static void	free_2d_table(char **tab)
 	}
 	free(tab[y]);
 	free(tab);
-	tab = NULL;
 }
 
 void	free_game(t_game *game)
 {
 	if (game->map)
 		free_2d_table(game->map);
+	if (game->floor)
+		free_image(game->floor);
 	if (game->player)
-		free(game->player);
+		free_image(game->player);
 	if (game->exit)
-		free(game->exit);
+		free_image(game->exit);
 	if (game->first_item)
 		free_sprite_list(game->first_item);
 	exit(0);

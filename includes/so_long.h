@@ -10,7 +10,7 @@
 # define LEFT 97
 # define DOWN 115
 # define RIGHT 100
-# define IMG_SIZE 64
+# define PX_PER_TILE game->tile_size
 
 # define MISSING_SPRITE "missing sprite in map, minimum = one of each (P, E, C)"
 
@@ -64,8 +64,8 @@ typedef struct s_game
 	void			*mlx;
 	char			**map;
 	void			*window;
-	t_vector		map_size;
 	int				tile_size;
+	t_vector		map_size;
 	t_vector		screen_res;
 	t_image			*floor;
 	t_image			*player;
@@ -79,7 +79,7 @@ void		error(t_game *game, char *s);
 void		free_game(t_game *game);
 int			ft_update(t_game *game);
 void		init_image(void *mlx, t_image *img, char *path);
-t_image		*init_image_struct(void);
+t_image		*init_image_struct(t_game *game);
 void		init_vector(t_vector *vector);
 void		get_positions(t_game *game);
 void		init_game_struct(t_game *game);

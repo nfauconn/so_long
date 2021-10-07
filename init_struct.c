@@ -6,12 +6,12 @@ void	init_vector(t_vector *vector)
 	vector->y = 0;
 }
 
-t_image	*init_image_struct(void)
+t_image	*init_image_struct(t_game *game)
 {
 	t_image	*image;
 	image = (t_image *)malloc(sizeof(t_image));
 	if (!image)
-		return (0);
+		error(game, "mem alloc failed in init_image_struct");
 	image->ptr = NULL;
 	image->addr = NULL;
 	image->bits_per_pixel = 0;
@@ -22,13 +22,13 @@ t_image	*init_image_struct(void)
 	return (image);
 }
 
-static t_sprite_elem	*init_sprite_elem(void)
+static t_sprite_elem	*init_first_sprite_elem(t_game *game)
 {
 	t_sprite_elem	*list;
 	list = (t_sprite_elem *)malloc(sizeof(t_sprite_elem));
 	if (!list)
-		return (0);
-	list->image = init_image_struct();
+		error(game, "mem alloc failed in init_sprite_elem");
+	list->image = init_image_struct(game);
 	list->prev = list;
 	list->next = list;
 	return (list);
@@ -36,26 +36,14 @@ static t_sprite_elem	*init_sprite_elem(void)
 
 void	init_game_struct(t_game *game)
 {
-/*	t_game	*game;
-
-	game = (t_game *)malloc(sizeof(t_game));
-	if (!game)
-		error(game, "malloc error in init_game_struct");
-*/	game->mlx = NULL;
+	game->mlx = NULL;
 	game->map = NULL;
-	init_vector(&game->map_size);
-	game->tile_size = 0;
 	game->window = NULL;
-	game->floor = init_image_struct();
-	if (!game->floor)
-		error(game, "mem alloc of player failed");
-	game->player = init_image_struct();
-	if (!game->player) // ... || !game->coll, etc...?
-		error(game, "mem alloc of player failed");
-	game->exit = init_image_struct();
-	if (!game->exit)
-		error(game, "mem alloc of exit failed");
-	game->first_item = init_sprite_elem();
-	if (!game->first_item)
-		error(game, "mem alloc of list of items failed");
+	game->tile_size = 0;
+	init_vector(&game->map_size);
+	init_vector(&game->screen_res);
+	game->floor = init_image_struct(game);
+	game->player = init_image_struct(game);
+	game->exit = init_image_struct(game);
+	game->first_item = init_first_sprite_elem(game);
 }

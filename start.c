@@ -1,13 +1,18 @@
 #include "so_long.h"
-
+/*
+static void	adapt_to_tile(t_game *game)
+{
+	game->map_size.x *= PX_PER_TILE;
+	game->map_size.y *= PX_PER_TILE;
+	adapt_image_size(game->player);
+}
+*/
 void	init_image(void *mlx, t_image *img, char *path)
 {
 	ft_printf("mlx = %p\n", mlx);
 	ft_printf("path = %s\n", path);
 	img->ptr = mlx_xpm_file_to_image(mlx, path, &img->size.x, &img->size.y);
-	img->addr  = mlx_get_data_addr(img->ptr, &img->bits_per_pixel, &img->line_size, &img->endian);
-	ft_printf("img->size.x = %d\nimg->size.y = %d\n", img->size.x, img->size.y);
-
+	img->addr  = mlx_get_data_addr(img, &img->bits_per_pixel, &img->line_size, &img->endian);
 }
 
 void	game_images_init(t_game *game)
@@ -29,7 +34,7 @@ void	game_images_init(t_game *game)
 	mlx_put_image_to_window(game->mlx, game->window, game->player->ptr, game->player->pos.x, game->player->pos.y);
 }
 
-int	get_tile_size(t_game *game, t_vector map_size, t_vector res)
+int	get_tile_size(t_vector map_size, t_vector res)
 {
 	t_vector	size;
 
@@ -62,7 +67,8 @@ void	start(t_game *game)
 	mlx_get_screen_size(game->mlx, &game->screen_res.x, &game->screen_res.y);
 	if (game->map_size.x > game->screen_res.x || game->map_size.y > game->screen_res.y)
 		error(game, "map is too big for screen resolution");
-	game->tile_size = get_tile_size(game, game->map_size, game->screen_res);
+	game->tile_size = get_tile_size(game->map_size, game->screen_res);
+	adapt_to_tile(game);
 	game_images_init(game);
 	mlx_hook(game->window, 17, 0, close_w, game);
 	mlx_key_hook(game->window, key_hooked, game);
