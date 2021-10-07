@@ -1,5 +1,10 @@
 #include "so_long.h"
 
+static void	display_img_values(t_image *img, char *name)
+{
+	ft_printf("%s_pos = %d, %d      ||      %s_size = %d, %d\n", name, img->pos->x, img->pos->y, name, img->size->x, img->size->y);
+}
+
 static void	display_values(t_game *game)
 {
 	int y = 0;
@@ -10,24 +15,27 @@ static void	display_values(t_game *game)
 	}
 	ft_printf("game->map[%d] = |%s|\n", y, game->map[y]);
 	
-	ft_printf("player_pos = %d, %d\n", game->player->pos->x, game->player->pos->y);
-	ft_printf("exit_pos = %d, %d\n", game->exit->pos->x, game->exit->pos->y);
+	display_img_values(game->display, "disp");
+	display_img_values(game->player, "play");
+	display_img_values(game->floor, "floo");
+	display_img_values(game->exit, "exit");
+
 	t_sprite_elem *tmp;
 	tmp = game->first_item;
 	while (tmp->next != game->first_item)
 	{
-		ft_printf("item_pos = %d, %d\n", tmp->image->pos->x, tmp->image->pos->y);
+		display_img_values(tmp->image, "item");
 		tmp = tmp->next;
 	}
-	ft_printf("item_pos = %d, %d\n", tmp->image->pos->x, tmp->image->pos->y);
+	display_img_values(tmp->image, "item");
 }
 
 void	start(t_game *game)
 {
 	get_positions(game);
-	display_values(game);
 	init_window(game);
 	init_game_images(game);
+	display_values(game);
 	mlx_hook(game->window, 17, 0, close_w, game);
 	mlx_key_hook(game->window, key_hooked, game);
 	mlx_loop(game->mlx);

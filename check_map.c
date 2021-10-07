@@ -56,6 +56,6 @@ void	check_map(t_game *game, char **map)
 			error(game, "map must be a rectangle");
 		y++;
 	}
-	game->map_size.x = map_width;
-	game->map_size.y = last_line;
+	game->map_size->x = map_width;
+	game->map_size->y = last_line;
 }
