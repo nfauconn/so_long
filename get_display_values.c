@@ -1,25 +1,22 @@
 #include "so_long.h"
 
-static void	insert_new_node(t_game *game, int count, int letter, t_vector pos)
+static void	insert_new_node(t_game *game, int count, t_vector pos)
 {
-	t_sprite_elem	**last;
 	t_sprite_elem	*new;
 
-	if (letter == 'C')
-		last = &game->first_item;
 	if (count == 1)
 	{
-		(*last)->image->pos = pos;
+		game->first_item->image->pos = pos;
 		return ;
 	}
 	new = (t_sprite_elem *)malloc(sizeof(t_sprite_elem));
 	if (!new)
 		error(game, "malloc error in insert_new_node");
-	new->next = (*last);
-	new->prev = (*last)->prev;
-	(*last)->prev = new;
+	new->next = game->first_item;
+	new->prev = game->first_item->prev;
+	game->first_item->prev = new;
 	new->prev->next = new;
-	new->image = init_image_struct();
+	new->image = init_image_struct(game);
 	new->image->pos = pos;
 }
 
@@ -38,7 +35,7 @@ static int	get_elem_pos(t_game *game, int letter)
 			if (game->map[pos.y][pos.x] == letter)
 			{
 				count++;
-				insert_new_node(game, count, letter, pos);
+				insert_new_node(game, count, pos);
 			}
 			pos.x++;
 		}
@@ -89,16 +86,28 @@ void	get_positions(t_game *game)
 	if (nb_sprites == 0)
 		error(game, MISSING_SPRITE);
 	nb_sprites = get_elem_pos(game, 'C');
-	
-	ft_printf("player_pos = %d, %d\n", game->player->pos.x, game->player->pos.y);
-	ft_printf("exit_pos = %d, %d\n", game->exit->pos.x, game->exit->pos.y);
+}
 
-	t_sprite_elem *tmp;
-	tmp = game->first_item;
-	while (tmp->next != game->first_item)
+int	get_tile_size(t_vector map_size, t_vector res)
+{
+	t_vector	size;
+
+	size = (t_vector){.x = res.x / map_size.x, .y = res.y / map_size.y};
+	if (size.x <= size.y)
 	{
-		ft_printf("item_pos = %d, %d\n", tmp->image->pos.x, tmp->image->pos.y);
-		tmp = tmp->next;
+		if (size.y * map_size.x > res.x)
+			size.y = (res.x / map_size.x) - 1;
 	}
-	ft_printf("item_pos = %d, %d\n", tmp->image->pos.x, tmp->image->pos.y);
+	else
+	{
+		if (size.x * map_size.y > res.y)
+			size.x = (res.y / map_size.y) - 1;
+	}
+	if (size.x < size.y)
+	{
+		if (size.x < 1)
+			return (1);
+		return (size.x);
+	}
+	return (size.y);
 }

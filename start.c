@@ -1,75 +1,33 @@
 #include "so_long.h"
-/*
-static void	adapt_to_tile(t_game *game)
-{
-	game->map_size.x *= PX_PER_TILE;
-	game->map_size.y *= PX_PER_TILE;
-	adapt_image_size(game->player);
-}
-*/
-void	init_image(void *mlx, t_image *img, char *path)
-{
-	ft_printf("mlx = %p\n", mlx);
-	ft_printf("path = %s\n", path);
-	img->ptr = mlx_xpm_file_to_image(mlx, path, &img->size.x, &img->size.y);
-	img->addr  = mlx_get_data_addr(img, &img->bits_per_pixel, &img->line_size, &img->endian);
-}
 
-void	game_images_init(t_game *game)
+static void	display_values(t_game *game)
 {
-	t_sprite_elem	*next_item;
-
-	game->window = mlx_new_window(game->mlx, game->map_size.x , game->map_size.y, "so_long");
-	init_image(game->mlx, game->floor, "./grass.xpm");
-	init_image(game->mlx, game->player, "./puck.xpm");
-	init_image(game->mlx, game->first_item->image, "./snail.xpm");
-	next_item = game->first_item->next;
-	while (next_item != game->first_item)
+	int y = 0;
+	while (game->map[y])
 	{
-		init_image(game->mlx, next_item->image, "snail.xpm");
-		next_item = next_item->next;
+		ft_printf("game->map[%d] = |%s|\n", y, game->map[y]);
+		y++;
 	}
-	ft_printf("game->player->pos.x = %d\n", game->player->pos.x);
-	ft_printf("game->player->pos.y = %d\n", game->player->pos.y);
-	mlx_put_image_to_window(game->mlx, game->window, game->player->ptr, game->player->pos.x, game->player->pos.y);
-}
-
-int	get_tile_size(t_vector map_size, t_vector res)
-{
-	t_vector	size;
-
-	size = (t_vector){.x = res.x / map_size.x, .y = res.y / map_size.y};
-	if (size.x <= size.y)
+	ft_printf("game->map[%d] = |%s|\n", y, game->map[y]);
+	
+	ft_printf("player_pos = %d, %d\n", game->player->pos.x, game->player->pos.y);
+	ft_printf("exit_pos = %d, %d\n", game->exit->pos.x, game->exit->pos.y);
+	t_sprite_elem *tmp;
+	tmp = game->first_item;
+	while (tmp->next != game->first_item)
 	{
-		if (size.y * map_size.x > res.x)
-			size.y = (res.x / map_size.x) - 1;
+		ft_printf("item_pos = %d, %d\n", tmp->image->pos.x, tmp->image->pos.y);
+		tmp = tmp->next;
 	}
-	else
-	{
-		if (size.x * map_size.y > res.y)
-			size.x = (res.y / map_size.y) - 1;
-	}
-	if (size.x < size.y)
-	{
-		if (size.x < 1)
-			return (1);
-		return (size.x);
-	}
-	return (size.y);
+	ft_printf("item_pos = %d, %d\n", tmp->image->pos.x, tmp->image->pos.y);
 }
 
 void	start(t_game *game)
 {
 	get_positions(game);
-	game->mlx = mlx_init();
-	if (!game->mlx)
-		error(game, "start : failed to initialize mlx");
-	mlx_get_screen_size(game->mlx, &game->screen_res.x, &game->screen_res.y);
-	if (game->map_size.x > game->screen_res.x || game->map_size.y > game->screen_res.y)
-		error(game, "map is too big for screen resolution");
-	game->tile_size = get_tile_size(game->map_size, game->screen_res);
-	adapt_to_tile(game);
-	game_images_init(game);
+	display_values(game);
+	init_window(game);
+	init_game_images(game);
 	mlx_hook(game->window, 17, 0, close_w, game);
 	mlx_key_hook(game->window, key_hooked, game);
 	mlx_loop(game->mlx);

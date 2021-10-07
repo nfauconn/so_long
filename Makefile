@@ -10,8 +10,7 @@ MLX_FLAGS = -lm -lmlx -lXext -lX11
 INCLUDES = -I includes -I libft/includes -I mlx
 COMP = ${CC} ${CFLAGS}
 RM	 = rm -rf
-SRCS = color.c check_map.c error.c free.c hooks.c init_struct.c main.c parse_map.c start.c \
-get_positions.c
+SRCS = color.c check_map.c error.c free.c get_display_values.c hooks.c init_display.c init_struct.c main.c parse_map.c start.c
 OBJS = ${addprefix ${OBJ_DIR}/,${SRCS:.c=.o}}
 
 ${OBJ_DIR}/%.o: %.c
