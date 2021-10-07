@@ -45,7 +45,7 @@ typedef struct s_image
 {
 	void		*ptr;
 	char		*addr;
-	int			bits_per_pixel;
+	int			bpp;
 	int			line_size;
 	int			endian;
 	t_vector	*size;

@@ -21,7 +21,7 @@ t_image	*init_image_struct(t_game *game)
 		error(game, "mem alloc failed in init_image_struct");
 	image->ptr = NULL;
 	image->addr = NULL;
-	image->bits_per_pixel = 0;
+	image->bpp = 0;
 	image->line_size = 0;
 	image->endian = 0;
 	image->size = init_vector(game);

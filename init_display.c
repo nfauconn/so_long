@@ -11,7 +11,7 @@ void	init_image(t_game *game, void *mlx, t_image *img, char *path)
 	img->ptr = mlx_xpm_file_to_image(mlx, path, &img->size->x, &img->size->y);
 	img->size->x = game->tile_size;
 	img->size->y = game->tile_size;
-	img->addr  = mlx_get_data_addr(img->ptr, &img->bits_per_pixel, &img->line_size, &img->endian);
+	img->addr  = mlx_get_data_addr(img->ptr, &img->bpp, &img->line_size, &img->endian);
 }
 
 void	init_game_images(t_game *game)
@@ -41,4 +41,6 @@ void	init_window(t_game *game)
 	game->tile_size = get_tile_size(game->map_size, game->screen_res);
 	adapt_to_tile(game);
 	game->window = mlx_new_window(game->mlx, game->map_size->x , game->map_size->y, "so_long");
+	game->display->ptr = mlx_new_image(game->mlx, game->map_size->x, game->map_size->y);
+	game->display->addr = mlx_get_data_addr(game->display->ptr, &game->display->bpp, &game->display->line_size, &game->display->endian);
 }
