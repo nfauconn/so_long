@@ -10,16 +10,16 @@ static void	display_values(t_game *game)
 	}
 	ft_printf("game->map[%d] = |%s|\n", y, game->map[y]);
 	
-	ft_printf("player_pos = %d, %d\n", game->player->pos.x, game->player->pos.y);
-	ft_printf("exit_pos = %d, %d\n", game->exit->pos.x, game->exit->pos.y);
+	ft_printf("player_pos = %d, %d\n", game->player->pos->x, game->player->pos->y);
+	ft_printf("exit_pos = %d, %d\n", game->exit->pos->x, game->exit->pos->y);
 	t_sprite_elem *tmp;
 	tmp = game->first_item;
 	while (tmp->next != game->first_item)
 	{
-		ft_printf("item_pos = %d, %d\n", tmp->image->pos.x, tmp->image->pos.y);
+		ft_printf("item_pos = %d, %d\n", tmp->image->pos->x, tmp->image->pos->y);
 		tmp = tmp->next;
 	}
-	ft_printf("item_pos = %d, %d\n", tmp->image->pos.x, tmp->image->pos.y);
+	ft_printf("item_pos = %d, %d\n", tmp->image->pos->x, tmp->image->pos->y);
 }
 
 void	start(t_game *game)

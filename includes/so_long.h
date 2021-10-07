@@ -86,7 +86,7 @@ t_image		*init_image_struct(t_game *game);
 t_vector	*init_vector(t_game *game);
 void		init_window(t_game *game);
 void		get_positions(t_game *game);
-int			get_tile_size(t_vector map_size, t_vector res);
+int			get_tile_size(t_vector *map_size, t_vector *res);
 void		init_game_struct(t_game *game);
 int			key_hooked(t_game *game, int key);
 void		parse_map(t_game *game, int argc, char *file);

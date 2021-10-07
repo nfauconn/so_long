@@ -6,7 +6,8 @@ static void	insert_new_node(t_game *game, int count, t_vector pos)
 
 	if (count == 1)
 	{
-		game->first_item->image->pos = pos;
+		game->first_item->image->pos->x = pos.x;
+		game->first_item->image->pos->y = pos.y;
 		return ;
 	}
 	new = (t_sprite_elem *)malloc(sizeof(t_sprite_elem));
@@ -17,7 +18,8 @@ static void	insert_new_node(t_game *game, int count, t_vector pos)
 	game->first_item->prev = new;
 	new->prev->next = new;
 	new->image = init_image_struct(game);
-	new->image->pos = pos;
+	new->image->pos->x = pos.x;
+	new->image->pos->y = pos.y;
 }
 
 static int	get_elem_pos(t_game *game, int letter)
@@ -61,7 +63,8 @@ static int	get_sprite_pos(char **map, t_image *sprite, int letter)
 			if (map[pos.y][pos.x] == letter)
 			{
 				count++;
-				sprite->pos = pos;
+				sprite->pos->x = pos.x;
+				sprite->pos->y = pos.y;
 			}
 			pos.x++;
 		}
@@ -88,20 +91,21 @@ void	get_positions(t_game *game)
 	nb_sprites = get_elem_pos(game, 'C');
 }
 
-int	get_tile_size(t_vector map_size, t_vector res)
+int	get_tile_size(t_vector *map_size, t_vector *res)
 {
 	t_vector	size;
 
-	size = (t_vector){.x = res.x / map_size.x, .y = res.y / map_size.y};
+	size.x = res->x / map_size->x;
+	size.y = res->y / map_size->y;
 	if (size.x <= size.y)
 	{
-		if (size.y * map_size.x > res.x)
-			size.y = (res.x / map_size.x) - 1;
+		if (size.y * map_size->x > res->x)
+			size.y = (res->x / map_size->x) - 1;
 	}
 	else
 	{
-		if (size.x * map_size.y > res.y)
-			size.x = (res.y / map_size.y) - 1;
+		if (size.x * map_size->y > res->y)
+			size.x = (res->y / map_size->y) - 1;
 	}
 	if (size.x < size.y)
 	{

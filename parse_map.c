@@ -15,7 +15,7 @@ static void	fill_map(t_game *game, char *file)
 	while (ret_gnl > 0)
 	{
 		ret_gnl = get_next_line(fd, &line);
-		game->map[y] = (char *)malloc(sizeof(char) * (game->map_size.x));
+		game->map[y] = (char *)malloc(sizeof(char) * (game->map_size->x));
 		x = 0;
 		while (line[x])
 		{
@@ -41,7 +41,7 @@ static t_bool	count_lines(t_game *game, char *file)
 	if (!fd)
 		return (FAILURE);
 	max_x = 0;
-	game->map_size.y = 1;
+	game->map_size->y = 1;
 	while (1)
 	{
 		ret = read(fd, &c, 1);
@@ -52,10 +52,10 @@ static t_bool	count_lines(t_game *game, char *file)
 			break ;
 		if (c == '\n')
 		{
-			if (max_x > game->map_size.x)
-				game->map_size.x = max_x;
+			if (max_x > game->map_size->x)
+				game->map_size->x = max_x;
 			max_x = 0;
-			game->map_size.y++;
+			game->map_size->y++;
 		}
 	}
 	close(fd);
@@ -70,7 +70,7 @@ void	parse_map(t_game *game, int argc, char *file)
 		error(game, "invalid format for the map : please use *.ber");
 	if (count_lines(game, file) == FAILURE)
 		error(game, "wrong fd : please verify that file exists / is not a directory");
-	game->map = (char **)malloc(sizeof(char *) * (game->map_size.y + 1));
+	game->map = (char **)malloc(sizeof(char *) * (game->map_size->y + 1));
 	if (!game->map)
 		error(game, "malloc failure on alloc_colums");
 	fill_map(game, file);
