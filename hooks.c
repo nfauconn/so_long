@@ -30,7 +30,7 @@ int	close_w(t_game *game)
 
 int	key_hooked(t_game *game, int key)
 {
-//	ft_printf("keycode = %d\n", key);
+	ft_printf("keycode = %d\n", key);
 	if (key == ECHAP)
 		close_w(game);
 /*	mlx_clear_window(game->mlx, game->window);
@@ -47,11 +47,12 @@ int	key_hooked(t_game *game, int key)
 }
 
 int	ft_update(t_game *game)
-{(void)game;
-	static int	frame;
+{
+	(void)game;
+/*	static int	frame;
 
 	frame++;
-/*	if (frame == 2000)
+	if (frame == 2000)
 	{
 		game->first_item->pos->y += 1;
 		game->player->pos->y += 1;
