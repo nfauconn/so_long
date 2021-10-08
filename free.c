@@ -2,6 +2,8 @@
 
 static void	free_image(t_image *img)
 {
+//	if (img->ptr)
+//		free(img->ptr);
 	if (img->size)
 		free(img->size);
 	if (img->pos)
@@ -59,4 +61,6 @@ void	free_game(t_game *game)
 		free_image(game->exit);
 	if (game->first_item)
 		free_sprite_list(game->first_item);
+	if (game->mlx)
+		free(game->mlx);
 }

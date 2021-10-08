@@ -43,7 +43,7 @@ void	start(t_game *game)
 	init_game_images(game);
 	display_values(game);
 	draw_window(game);
-	mlx_hook(game->window, 17, 0, close_w, game);
-	mlx_loop_hook(game->mlx, update, game);
+//	mlx_loop_hook(game->mlx, update, game);
+	mlx_key_hook(game->window, key_hooked, game);
 	mlx_loop(game->mlx);
 }

@@ -45,4 +45,5 @@ void	init_window(t_game *game)
 	game->background->size->x = game->map_size->x;
 	game->background->size->y = game->map_size->y;
 	color_background(game->background, new_color(204, 204, 255, 0));
+	mlx_hook(game->window, 17, 0, close_w, game);
 }

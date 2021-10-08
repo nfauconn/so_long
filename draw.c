@@ -1,14 +1,16 @@
 #include "so_long.h"
 
-void	draw_tile(t_game *game, int x, int y)
+/*void	draw_tile(t_game *game, int x, int y)
 {
-	if (game->map[y][x])
-		return ;
+	t_vector	pos;
+	char		*color;
+	t_image
 }
-
+*/
 void	draw_window(t_game *game)
 {
-	int	x;
+	(void)game;
+/*	int	x;
 	int	y;
 
 	y = 0;
@@ -22,4 +24,4 @@ void	draw_window(t_game *game)
 		}
 		y++;
 	}
-}
+*/}

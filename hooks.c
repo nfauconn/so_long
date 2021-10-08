@@ -19,20 +19,22 @@ void	destroy_sprites(t_game *game)
 int	close_w(t_game *game)
 {
 	destroy_sprites(game);
+	mlx_destroy_image(game->mlx, game->background->ptr);
 	mlx_destroy_window(game->mlx, game->window);
 	mlx_destroy_display(game->mlx);
 	mlx_loop_end(game->mlx);
-	free(game->mlx);
 	free_game(game);
 	exit(0);
 	return (0);
 }
 
-int	key_hooked(t_game *game, int key)
+int	key_hooked(int key, t_game *game)
 {
-	printf("keycode = %ld\n", (long)key);
+	printf("keycode = %d\n", key);
 	if (key == ECHAP)
 		close_w(game);
+	if (key == UP || key == W)
+		ft_printf("UP\n");
 /*	mlx_clear_window(game->mlx, game->window);
 	if (key == UP)
 		game->player->pos->y -= game->player->size->y;
@@ -48,8 +50,8 @@ int	key_hooked(t_game *game, int key)
 
 int	update(t_game *game)
 {
-	(void)game;
-	mlx_put_image_to_window(game->mlx, game->window, game->background, 0, 0);
+	mlx_clear_window(game->mlx, game->window);
+//	mlx_put_image_to_window(game->mlx, game->window, game->background, 0, 0);
 
 /*	static int	frame;
 

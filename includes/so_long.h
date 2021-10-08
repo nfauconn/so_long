@@ -7,9 +7,13 @@
 
 # define ECHAP 65307
 # define UP 65362
+# define W 119
 # define LEFT 65364
+# define A 97
 # define DOWN 65363
+# define S 115
 # define RIGHT 65361
+# define D 100
 
 # define MISSING_SPRITE "missing sprite in map, minimum = one of each (P, E, C)"
 
@@ -89,7 +93,7 @@ t_image		*init_image_struct(t_game *game);
 t_vector	*init_vector(t_game *game);
 void		init_window(t_game *game);
 void		init_game_struct(t_game *game);
-int			key_hooked(t_game *game, int key);
+int			key_hooked(int key, t_game *game);
 t_color	new_color(int r, int g, int b, int t);
 void		parse_map(t_game *game, int argc, char *file);
 void		start(t_game *game);
