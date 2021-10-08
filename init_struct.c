@@ -50,7 +50,7 @@ void	init_game_struct(t_game *game)
 	game->tile_size = 0;
 	game->map_size = init_vector(game);
 	game->screen_res = init_vector(game);
-	game->display = init_image_struct(game);
+	game->background = init_image_struct(game);
 	game->floor = init_image_struct(game);
 	game->player = init_image_struct(game);
 	game->exit = init_image_struct(game);

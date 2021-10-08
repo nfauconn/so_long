@@ -30,7 +30,7 @@ int	close_w(t_game *game)
 
 int	key_hooked(t_game *game, int key)
 {
-	ft_printf("keycode = %d\n", key);
+	printf("keycode = %ld\n", (long)key);
 	if (key == ECHAP)
 		close_w(game);
 /*	mlx_clear_window(game->mlx, game->window);
@@ -42,13 +42,15 @@ int	key_hooked(t_game *game, int key)
 		game->player->pos->y += game->player->size->y;
 	else if (key == RIGHT)
 		game->player->pos->x += game->player->size->x;
-	mlx_put_image_to_window(game->mlx, game->window, game->display->ptr, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->window, game->background->ptr, 0, 0);
 */	return (0);
 }
 
-int	ft_update(t_game *game)
+int	update(t_game *game)
 {
 	(void)game;
+	mlx_put_image_to_window(game->mlx, game->window, game->background, 0, 0);
+
 /*	static int	frame;
 
 	frame++;

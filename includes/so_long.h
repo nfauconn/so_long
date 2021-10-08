@@ -6,11 +6,10 @@
 # include "mlx_int.h"
 
 # define ECHAP 65307
-# define UP 119
-# define LEFT 97
-# define DOWN 115
-# define RIGHT 100
-# define PX_PER_TILE game->tile_size
+# define UP 65362
+# define LEFT 65364
+# define DOWN 65363
+# define RIGHT 65361
 
 # define MISSING_SPRITE "missing sprite in map, minimum = one of each (P, E, C)"
 
@@ -38,7 +37,7 @@ typedef struct s_color
 	int	r;
 	int	g;
 	int	b;
-	int	a;
+	int	t;
 }	t_color;
 
 typedef struct s_image
@@ -67,7 +66,7 @@ typedef struct s_game
 	int				tile_size;
 	t_vector		*map_size;
 	t_vector		*screen_res;
-	t_image			*display;
+	t_image			*background;
 	t_image			*floor;
 	t_image			*player;
 	t_image			*exit;
@@ -77,9 +76,11 @@ typedef struct s_game
 void		adapt_to_tile(t_game *game);
 void		check_map(t_game *game, char **map);
 int			close_w(t_game *game);
+void	color_background(t_image *background, t_color color);
+void		draw_window(t_game *game);
 void		error(t_game *game, char *s);
 void		free_game(t_game *game);
-int			ft_update(t_game *game);
+int			update(t_game *game);
 void		get_positions(t_game *game);
 int			get_tile_size(t_vector *map_size, t_vector *res);
 void		init_game_images(t_game *game);
@@ -89,6 +90,7 @@ t_vector	*init_vector(t_game *game);
 void		init_window(t_game *game);
 void		init_game_struct(t_game *game);
 int			key_hooked(t_game *game, int key);
+t_color	new_color(int r, int g, int b, int t);
 void		parse_map(t_game *game, int argc, char *file);
 void		start(t_game *game);
 

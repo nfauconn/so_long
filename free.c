@@ -49,8 +49,8 @@ void	free_game(t_game *game)
 		free(game->map_size);
 	if (game->screen_res)
 		free(game->screen_res);
-	if (game->display)
-		free_image(game->display);
+	if (game->background)
+		free_image(game->background);
 	if (game->floor)
 		free_image(game->floor);
 	if (game->player)
