@@ -16,6 +16,7 @@
 # define D 100
 # define BPP bits_per_pixel
 # define CPL size_line
+# define PPT px_per_line
 
 # define MISSING_SPRITE "missing sprite in map, minimum = one of each (P, E, C)"
 

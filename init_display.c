@@ -28,11 +28,11 @@ t_vector	operate_vector(t_vector vector, char operation, int nb)
 }
 
 void	init_image(t_game *game, void *mlx, t_image *img, char *path)
-{(void)game;
+{
 	img->ptr = mlx_xpm_file_to_image(mlx, path, &img->size->x, &img->size->y);
 //	img->size->x = game->pixels_per_tile;
 //	img->size->y = game->pixels_per_tile;
-//	img->addr  = mlx_get_data_addr(img->ptr, &img->BPP, &img->CPL, &img->endian);
+	img->addr  = mlx_get_data_addr(img->ptr, &img->BPP, &img->CPL, &img->endian);
 }
 
 void	init_game_images(t_game *game)
