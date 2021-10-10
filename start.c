@@ -14,10 +14,10 @@ static void	display_values(t_game *game)
 		y++;
 	}
 	ft_printf("game->map[%d] = |%s|\n", y, game->map[y]);
-	
 	display_img_values(game->background, "disp");
 	display_img_values(game->player, "play");
 	display_img_values(game->floor, "floo");
+	display_img_values(game->wall, "wall");
 	display_img_values(game->exit, "exit");
 
 	t_sprite_elem *tmp;
@@ -28,12 +28,13 @@ static void	display_values(t_game *game)
 		tmp = tmp->next;
 	}
 	display_img_values(tmp->image, "item");
-	ft_printf("taille d-une case = %d\n", game->tile_size);
-	ft_printf("taille d-une case / 64 = %d\n", game->tile_size / 64);
-	ft_printf("bpp player = %d\n", game->player->bpp);
+	ft_printf("pixels_per_tile = %d\n", game->pixels_per_tile);
+	ft_printf("char per tile (pixels_per_tile / 32) = %d\n", game->pixels_per_tile / 32);
 	ft_printf("screen_res = %dx%d\n", game->screen_res->x, game->screen_res->y);
-	ft_printf("map_size = %dx%d\n", game->map_size->x / game->tile_size, game->map_size->y / game->tile_size);
-	ft_printf("map_size * tile_size= %dx%d\n", game->map_size->x, game->map_size->y);
+	ft_printf("map_size = %dx%d\n", game->map_size->x, game->map_size->y);
+//	ft_printf("map_size * pixels_per_tile= %dx%d\n", game->map_size->x, game->map_size->y);
+	ft_printf("chars_per_line addre background = %d\n", game->background->CPL);
+	ft_printf("BPP = %d\n", game->background->BPP);
 }
 
 void	start(t_game *game)
@@ -41,8 +42,8 @@ void	start(t_game *game)
 	get_positions(game);
 	init_window(game);
 	init_game_images(game);
-	display_values(game);
 	draw_window(game);
+	display_values(game);
 //	mlx_loop_hook(game->mlx, update, game);
 	mlx_key_hook(game->window, key_hooked, game);
 	mlx_loop(game->mlx);

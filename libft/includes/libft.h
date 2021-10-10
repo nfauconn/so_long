@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/09/30 11:59:35 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/10 15:42:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ typedef struct s_list
 	struct s_list	*next;
 }				t_list;
 
+int			ft_square_root(int nb);
+float		ft_negative_power(int nb, int power);
+t_ull		ft_power(int nb, int power);
 int			ft_array_size(char **array);
 void		*ft_memset(void *b, int c, size_t len);
 void		ft_bzero(void *s, size_t n);

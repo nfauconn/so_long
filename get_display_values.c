@@ -48,7 +48,7 @@ static int	get_elem_pos(t_game *game, int letter)
 	return (count);
 }
 
-static int	get_sprite_pos(char **map, t_image *sprite, int letter)
+static size_t	get_sprite_pos(char **map, t_image *sprite, int letter)
 {
 	t_vector	pos;
 	size_t		count;
@@ -77,7 +77,7 @@ static int	get_sprite_pos(char **map, t_image *sprite, int letter)
 
 void	get_positions(t_game *game)
 {
-	int	nb_sprites;
+	size_t	nb_sprites;
 
 	nb_sprites = 0;
 	nb_sprites = get_sprite_pos(game->map, game->player, 'P');
@@ -88,24 +88,26 @@ void	get_positions(t_game *game)
 	nb_sprites = get_sprite_pos(game->map, game->exit, 'E');
 	if (nb_sprites == 0)
 		error(game, MISSING_SPRITE);
-	nb_sprites = get_elem_pos(game, 'C');
+	game->item_nb = get_elem_pos(game, 'C');
+	if (game->item_nb == 0)
+		error(game, MISSING_SPRITE);
 }
 
-int	get_tile_size(t_vector *map_size, t_vector *res)
+int	get_pixels_per_tile(t_vector img_size, t_vector res)
 {
 	t_vector	size;
 
-	size.x = res->x / map_size->x;
-	size.y = res->y / map_size->y;
+	size.x = res.x / img_size.x;
+	size.y = res.y / img_size.y;
 	if (size.x <= size.y)
 	{
-		if (size.y * map_size->x > res->x)
-			size.y = (res->x / map_size->x) - 1;
+		if (size.y * img_size.x > res.x)
+			size.y = (res.x / img_size.x) - 1;
 	}
 	else
 	{
-		if (size.x * map_size->y > res->y)
-			size.x = (res->y / map_size->y) - 1;
+		if (size.x * img_size.y > res.y)
+			size.x = (res.y / img_size.y) - 1;
 	}
 	if (size.x < size.y)
 	{

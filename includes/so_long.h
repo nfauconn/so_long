@@ -14,15 +14,10 @@
 # define S 115
 # define RIGHT 65361
 # define D 100
+# define BPP bits_per_pixel
+# define CPL size_line
 
 # define MISSING_SPRITE "missing sprite in map, minimum = one of each (P, E, C)"
-
-typedef enum e_sprites
-{
-	P = 0,
-	C,
-	E
-}	t_sprites;
 
 typedef enum e_bool
 {
@@ -48,11 +43,12 @@ typedef struct s_image
 {
 	void		*ptr;
 	char		*addr;
-	int			bpp;
-	int			line_size;
+	int			bits_per_pixel;
+	int			size_line;
 	int			endian;
 	t_vector	*size;
 	t_vector	*pos;
+	t_vector	*px_per_tile;
 }	t_image;
 
 typedef struct s_sprite_elem
@@ -67,14 +63,16 @@ typedef struct s_game
 	void			*mlx;
 	char			**map;
 	void			*window;
-	int				tile_size;
+	int				pixels_per_tile;
 	t_vector		*map_size;
 	t_vector		*screen_res;
 	t_image			*background;
 	t_image			*floor;
+	t_image			*wall;
 	t_image			*player;
 	t_image			*exit;
 	t_sprite_elem	*first_item;
+	size_t			item_nb;
 }	t_game;
 
 void		adapt_to_tile(t_game *game);
@@ -86,7 +84,7 @@ void		error(t_game *game, char *s);
 void		free_game(t_game *game);
 int			update(t_game *game);
 void		get_positions(t_game *game);
-int			get_tile_size(t_vector *map_size, t_vector *res);
+int			get_pixels_per_tile(t_vector img_size, t_vector res);
 void		init_game_images(t_game *game);
 void		init_image(t_game *game, void *mlx, t_image *img, char *path);
 t_image		*init_image_struct(t_game *game);

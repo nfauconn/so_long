@@ -21,11 +21,12 @@ t_image	*init_image_struct(t_game *game)
 		error(game, "mem alloc failed in init_image_struct");
 	image->ptr = NULL;
 	image->addr = NULL;
-	image->bpp = 0;
-	image->line_size = 0;
+	image->BPP = 0;
+	image->CPL = 0;
 	image->endian = 0;
 	image->size = init_vector(game);
 	image->pos = init_vector(game);
+	image->px_per_tile = init_vector(game);
 	return (image);
 }
 
@@ -47,12 +48,14 @@ void	init_game_struct(t_game *game)
 	game->mlx = NULL;
 	game->map = NULL;
 	game->window = NULL;
-	game->tile_size = 0;
+	game->pixels_per_tile = 0;
 	game->map_size = init_vector(game);
 	game->screen_res = init_vector(game);
 	game->background = init_image_struct(game);
+	game->wall = init_image_struct(game);
 	game->floor = init_image_struct(game);
 	game->player = init_image_struct(game);
 	game->exit = init_image_struct(game);
 	game->first_item = init_first_sprite_elem(game);
+	game->item_nb = 0;
 }

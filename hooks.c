@@ -4,6 +4,7 @@ void	destroy_sprites(t_game *game)
 {
 	t_sprite_elem	*next_item;
 
+	mlx_destroy_image(game->mlx, game->wall->ptr);
 	mlx_destroy_image(game->mlx, game->floor->ptr);
 	mlx_destroy_image(game->mlx, game->player->ptr);
 	mlx_destroy_image(game->mlx, game->exit->ptr);

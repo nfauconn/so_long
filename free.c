@@ -55,6 +55,8 @@ void	free_game(t_game *game)
 		free_image(game->background);
 	if (game->floor)
 		free_image(game->floor);
+	if (game->wall)
+		free_image(game->wall);
 	if (game->player)
 		free_image(game->player);
 	if (game->exit)
