@@ -57,5 +57,5 @@ void	check_map(t_game *game, char **map)
 		y++;
 	}
 	game->map_size->x = map_width;
-	game->map_size->y = last_line;
+	game->map_size->y = last_line + 1;
 }

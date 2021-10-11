@@ -15,7 +15,7 @@ static void	fill_map(t_game *game, char *file)
 	while (ret_gnl > 0)
 	{
 		ret_gnl = get_next_line(fd, &line);
-		game->map[y] = (char *)malloc(sizeof(char) * (game->map_size->x));
+		game->map[y] = (char *)malloc(sizeof(char) * (game->map_size->x + 1));
 		x = 0;
 		while (line[x])
 		{
@@ -53,7 +53,7 @@ static t_bool	count_lines(t_game *game, char *file)
 		if (c == '\n')
 		{
 			if (max_x > game->map_size->x)
-				game->map_size->x = max_x;
+				game->map_size->x = max_x - 1;
 			max_x = 0;
 			game->map_size->y++;
 		}

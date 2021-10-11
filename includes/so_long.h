@@ -87,7 +87,7 @@ int			update(t_game *game);
 void		get_positions(t_game *game);
 int			get_pixels_per_tile(t_vector img_size, t_vector res);
 void		init_game_images(t_game *game);
-void		init_image(t_game *game, void *mlx, t_image *img, char *path);
+void		init_image(void *mlx, t_image *img, char *path);
 t_image		*init_image_struct(t_game *game);
 t_vector	*init_vector(t_game *game);
 void		init_window(t_game *game);

@@ -27,7 +27,7 @@ t_vector	operate_vector(t_vector vector, char operation, int nb)
 	return (res);
 }
 
-void	init_image(t_game *game, void *mlx, t_image *img, char *path)
+void	init_image(void *mlx, t_image *img, char *path)
 {
 	img->ptr = mlx_xpm_file_to_image(mlx, path, &img->size->x, &img->size->y);
 //	img->size->x = game->pixels_per_tile;
@@ -39,15 +39,15 @@ void	init_game_images(t_game *game)
 {
 	t_sprite_elem	*next_item;
 
-	init_image(game, game->mlx, game->wall, "textures/wall.xpm");
-	init_image(game, game->mlx, game->floor, "textures/grass.xpm");
-	init_image(game, game->mlx, game->player, "textures/puck.xpm");
-	init_image(game, game->mlx, game->exit, "textures/exit.xpm");
-	init_image(game, game->mlx, game->first_item->image, "textures/snail.xpm");
+	init_image(game->mlx, game->wall, "textures/wall.xpm");
+	init_image(game->mlx, game->floor, "textures/grass.xpm");
+	init_image(game->mlx, game->player, "textures/puck.xpm");
+	init_image(game->mlx, game->exit, "textures/exit.xpm");
+	init_image(game->mlx, game->first_item->image, "textures/snail.xpm");
 	next_item = game->first_item->next;
 	while (next_item != game->first_item)
 	{
-		init_image(game, game->mlx, next_item->image, "textures/snail.xpm");
+		init_image(game->mlx, next_item->image, "textures/snail.xpm");
 		next_item = next_item->next;
 	}
 }

@@ -8,6 +8,8 @@ static void	free_image(t_image *img)
 		free(img->size);
 	if (img->pos)
 		free(img->pos);
+	if (img->px_per_tile)
+		free(img->px_per_tile);
 	if (img)
 		free(img);
 }

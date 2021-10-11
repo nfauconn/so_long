@@ -27,8 +27,13 @@ t_image	*which_texture(t_game *game, char tile)
 	}
 	return (0);
 }
+/*
+void	set_pixel(t_image *img, int x, int y, int color)
+{
+	*(unsigned int *)(img->addr + (y * img->CPL * img->px_per_tile + x * (img->BPP / 8))) = color;
+}
 
-void	draw_tile(t_game *game, t_image img, int startX, int startY)
+void	draw_tile(t_game *game, t_image *img, int startX, int startY)
 {
 	t_vector	tile;
 	int			px_per_tile;
@@ -38,23 +43,23 @@ void	draw_tile(t_game *game, t_image img, int startX, int startY)
 
 	tile = (t_vector){.x = 1, .y = 1};
 	y = 0;
-	while (y < img.size->y)
+	while (y < img->size->y)
 	{
 		x = 0;
-		while (x < img.size->x)
+		while (x < img->size->x)
 		{
-			px_per_tile = get_pixels_per_tile(*(img.size), tile);
-			color = *(img.addr + ((y * img.CPL * img.BPP) + (x * (img.BPP / 8))));
-			img.p_data_y = startY + img.y;
-			img.p_data_x = startX + img.x;
+			px_per_tile = get_pixels_per_tile(*(img->size), tile);
+			color = *(img->addr + ((y * img->CPL * img->BPP) + (x * (img->BPP / 8))));
+			img->p_data_y = startY + img->y;
+			img->p_data_x = startX + img->x;
 			if (color != (int)BLACK)
-				set_pixel(img, img.p_data_y, img.p_data_x, color);
-			img.x++;
+				set_pixel(img, img->p_data_y, img->p_data_x, color);
+			img->x++;
 		}
-		img.y++;
+		img->y++;
 	}
 }
-
+*/
 void	draw_window(t_game *game)
 {
 	t_image	*img;
@@ -67,10 +72,10 @@ void	draw_window(t_game *game)
 		x = 0;
 		while (game->map[y][x])
 		{
-			if (game->map[y][x] == 'C')
-				printf("item texture case on map[%d][%d] = %c", y, x, game->map[y][x]);
+//			if (game->map[y][x] == 'C')
+//				printf("item texture case on map[%d][%d] = %c", y, x, game->map[y][x]);
 			img = which_texture(game, game->map[y][x]);
-			draw_tile(game, *img, x, y);
+//			draw_tile(game, img, x, y);
 			x++;
 		}
 		y++;
