@@ -1,28 +1,50 @@
 #include "so_long.h"
 
-static void	insert_new_node(t_game *game, int count, t_vector pos)
+static void	insert_new_node(t_game *game, t_sprite_elem *sprite, int count, t_vector pos, char letter)
 {
 	t_sprite_elem	*new;
 
-	if (count == 1)
+/*	if (sprite == ITEM)
 	{
-		game->first_item->image->pos->x = pos.x;
-		game->first_item->image->pos->y = pos.y;
-		return ;
+		if (count == 1)
+		{
+			game->first_item->image->pos->x = pos.x;
+			game->first_item->image->pos->y = pos.y;
+			return ;
+		}
+		new = (t_sprite_elem *)malloc(sizeof(t_sprite_elem));
+		if (!new)
+			error(game, "malloc error in insert_new_node");
+		new->next = game->first_item;
+		new->prev = game->first_item->prev;
+		game->first_item->prev = new;
+		new->prev->next = new;
+		new->image = init_image_struct(game, sprite);
+		new->image->pos->x = pos.x;
+		new->image->pos->y = pos.y;
 	}
-	new = (t_sprite_elem *)malloc(sizeof(t_sprite_elem));
-	if (!new)
-		error(game, "malloc error in insert_new_node");
-	new->next = game->first_item;
-	new->prev = game->first_item->prev;
-	game->first_item->prev = new;
-	new->prev->next = new;
-	new->image = init_image_struct(game);
-	new->image->pos->x = pos.x;
-	new->image->pos->y = pos.y;
+	if (sprite == EXIT)
+	{
+*/		if (count == 1)
+		{
+			sprite->image->pos->x = pos.x;
+			sprite->image->pos->y = pos.y;
+			return ;
+		}
+		new = (t_sprite_elem *)malloc(sizeof(t_sprite_elem));
+		if (!new)
+			error(game, "malloc error in insert_new_node");
+		new->next = sprite;
+		new->prev = sprite->prev;
+		sprite->prev = new;
+		new->prev->next = new;
+		new->image = init_image_struct(game, letter);
+		new->image->pos->x = pos.x;
+		new->image->pos->y = pos.y;
+//	}
 }
 
-static int	get_elem_pos(t_game *game, int letter)
+static void	get_elem_pos(t_game *game, t_sprite_elem *sprite, char letter)
 {
 	t_vector pos;
 	size_t	count;
@@ -37,30 +59,29 @@ static int	get_elem_pos(t_game *game, int letter)
 			if (game->map[pos.y][pos.x] == letter)
 			{
 				count++;
-				insert_new_node(game, count, pos);
+				insert_new_node(game, sprite, count, pos, letter);
 			}
 			pos.x++;
 		}
 		pos.y++;
 	}
 	if (count == 0)
-		return (0);
-	return (count);
+		error(game, MISSING_SPRITE);
 }
 
-static size_t	get_sprite_pos(char **map, t_image *sprite, int letter)
+static void	get_sprite_pos(t_game *game, t_image *sprite, int letter)
 {
 	t_vector	pos;
 	size_t		count;
 
 	count = 0;
 	pos.y = 0;
-	while (map[pos.y])
+	while (game->map[pos.y])
 	{
 		pos.x = 0;
-		while (map[pos.y][pos.x])
+		while (game->map[pos.y][pos.x])
 		{
-			if (map[pos.y][pos.x] == letter)
+			if (game->map[pos.y][pos.x] == letter)
 			{
 				count++;
 				sprite->pos->x = pos.x;
@@ -71,29 +92,19 @@ static size_t	get_sprite_pos(char **map, t_image *sprite, int letter)
 		pos.y++;
 	}
 	if (count == 0)
-		return (0);
-	return (count);
+		error(game, MISSING_SPRITE);
+	if (count > 1 && letter == PLAYER)
+		error(game, "found multiple player position in map");
 }
 
 void	get_positions(t_game *game)
 {
-	size_t	nb_sprites;
-
-	nb_sprites = 0;
-	nb_sprites = get_sprite_pos(game->map, game->player, 'P');
-	if (nb_sprites == 0)
-		error(game, MISSING_SPRITE);
-	if (nb_sprites > 1)
-		error(game, "found multiple player position in map");
-	nb_sprites = get_sprite_pos(game->map, game->exit, 'E');
-	if (nb_sprites == 0)
-		error(game, MISSING_SPRITE);
-	game->item_nb = get_elem_pos(game, 'C');
-	if (game->item_nb == 0)
-		error(game, MISSING_SPRITE);
+	get_sprite_pos(game, game->player, PLAYER);
+	get_elem_pos(game, game->first_exit, EXIT);
+	get_elem_pos(game, game->first_item, ITEM);
 }
 
-int	get_pixels_per_tile(t_vector img_size, t_vector res)
+int	get_tile_size(t_vector img_size, t_vector res)
 {
 	t_vector	size;
 

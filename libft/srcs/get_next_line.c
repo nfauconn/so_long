@@ -6,77 +6,69 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 16:24:05 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/09/29 17:53:57 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/12 11:33:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*line_return(char *over)
+static int	appendline(char **s, char **line)
 {
-	while (*over)
-	{
-		if (*over == '\n')
-			return (over);
-		over++;
-	}
-	return (NULL);
-}
-
-static int	fill_over(char **over, char *joined)
-{
+	int		len;
 	char	*tmp;
 
-	tmp = *over;
-	*over = ft_strdup(joined);
-	free(tmp);
-	free(joined);
+	len = 0;
+	while ((*s)[len] != '\n' && (*s)[len] != '\0')
+		len++;
+	if ((*s)[len] == '\n')
+	{
+		*line = ft_substr(*s, 0, len);
+		tmp = ft_strdup(&((*s)[len + 1]));
+		free(*s);
+		*s = tmp;
+		if ((*s)[0] == '\0')
+			ft_strdel(s);
+	}
+	else
+	{
+		*line = ft_strdup(*s);
+		ft_strdel(s);
+	}
 	return (1);
 }
 
-static int	ft_read(int fd, char **over, char **rest)
+static int	output(char **s, char **line, int ret, int fd)
 {
-	int		ret;
-	char	*buff;
-
-	buff = (char *)malloc(sizeof (char) * (BUFFER_SIZE + 1));
-	if (!buff || read(fd, buff, 0) < 0)
+	if (ret < 0)
 		return (-1);
-	if (!*over)
-		*over = ft_strdup("");
-	*rest = line_return(*over);
-	ret = read(fd, buff, BUFFER_SIZE);
-	while (!*rest && ret > 0)
-	{
-		buff[ret] = '\0';
-		fill_over(over, ft_strjoin(*over, buff));
-		*rest = line_return(*over);
-		ret = read(fd, buff, BUFFER_SIZE);
-	}
-	free(buff);
-	return (ret);
+	else if (ret == 0 && s[fd] == NULL)
+		return (0);
+	else
+		return (appendline(&s[fd], line));
 }
 
-int	get_next_line(int fd, char **line)
+int	get_next_line(const int fd, char **line)
 {
-	static char	*over[10240];
-	size_t		ret;
-	char		*rest[10240];
-	size_t		len;
+	int			ret;
+	static char	*s[FD_MAX];
+	char		buff[BUFFER_SIZE + 1];
+	char		*tmp;
 
-	rest[fd] = NULL;
-	ret = ft_read(fd, &over[fd], &rest[fd]);
-	if (fd > 10240 || fd < 0 || !line || BUFFER_SIZE < 1)
+	if (fd < 0 || line == NULL)
 		return (-1);
-	*line = ft_substr(over[fd], 0, rest[fd] - over[fd]);
-	len = ft_strlen(over[fd]) - ft_strlen(*line);
-	fill_over(&over[fd], ft_substr(over[fd], rest[fd] - over[fd] + 1, len));
-	if ((ret == 0 && len > 0) || ret > 0)
-		ret = 1;
-	if (ret <= 0)
+	while ((ret = read(fd, buff, BUFFER_SIZE)) > 0)
 	{
-		free(over[fd]);
-		over[fd] = NULL;
+		buff[ret] = '\0';
+		if (s[fd] == NULL)
+			s[fd] = ft_strdup(buff);
+		else
+		{
+			tmp = ft_strjoin(s[fd], buff);
+			free(s[fd]);
+			s[fd] = tmp;
+		}
+		if (ft_strchr(s[fd], '\n'))
+			break ;
 	}
-	return (ret);
+	return (output(s, line, ret, fd));
 }

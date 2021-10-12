@@ -2,8 +2,6 @@
 
 static void	free_image(t_image *img)
 {
-//	if (img->ptr)
-//		free(img->ptr);
 	if (img->size)
 		free(img->size);
 	if (img->pos)
@@ -55,14 +53,16 @@ void	free_game(t_game *game)
 		free(game->screen_res);
 	if (game->background)
 		free_image(game->background);
-	if (game->floor)
-		free_image(game->floor);
+	if (game->sprites)
+		free_image(game->sprites);
+	if (game->ground)
+		free_image(game->ground);
 	if (game->wall)
 		free_image(game->wall);
 	if (game->player)
 		free_image(game->player);
-	if (game->exit)
-		free_image(game->exit);
+	if (game->first_exit)
+		free_sprite_list(game->first_exit);
 	if (game->first_item)
 		free_sprite_list(game->first_item);
 	if (game->mlx)

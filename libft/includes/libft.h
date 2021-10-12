@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/10/10 15:42:57 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/12 11:37:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,43 @@
 # include "ft_printf.h"
 
 # define BUFFER_SIZE 100
+# define FD_MAX 10240
 
 typedef unsigned long long	t_ull;
+
+typedef enum e_bool
+{
+	SUCCESS = 1,
+	FAILURE = 0
+}	t_bool;
+
+typedef struct s_vector
+{
+	int	x;
+	int	y;
+}	t_vector;
+
+typedef struct s_float_vector
+{
+	float	x;
+	float	y;
+}	t_float_vector;
+
+typedef struct s_double_vector
+{
+	double	x;
+	double	y;
+}	t_double_vector;
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*prev;
 	struct s_list	*next;
-}				t_list;
+}	t_list;
 
+void		ft_strdel(char **as);
+t_vector	operate_vector(t_vector vector, char operation, int nb);
 int			ft_square_root(int nb);
 float		ft_negative_power(int nb, int power);
 t_ull		ft_power(int nb, int power);

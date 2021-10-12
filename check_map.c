@@ -36,26 +36,20 @@ static void	check_middle_line(t_game *game, char *line, size_t line_len)
 void	check_map(t_game *game, char **map)
 {
 	int		y;
-	size_t	map_width;
 	size_t	line_len;
-	int		last_line;
 
 	y = 0;
-	map_width = ft_strlen(*map);
-	last_line = ft_array_size(map) - 1;
 	while (map[y])
 	{
 		line_len = ft_strlen(map[y]);
 		if (line_len == 0)
 			error(game, "empty line in map");
-		if (y == 0 || y == last_line)
+		if (y == 0 || y == game->map_size->y)
 			check_wall_line(game, map[y]);
 		else
 			check_middle_line(game, map[y], line_len);
-		if (line_len != map_width)
+		if (line_len != (size_t)game->map_size->x)
 			error(game, "map must be a rectangle");
 		y++;
 	}
-	game->map_size->x = map_width;
-	game->map_size->y = last_line + 1;
 }

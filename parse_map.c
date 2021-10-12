@@ -1,10 +1,23 @@
 #include "so_long.h"
 
+static void	fill_line(t_game *game, char *line, int y)
+{
+	int		x;
+	
+	game->map[y] = (char *)malloc(sizeof(char) * (game->map_size->x + 1));
+	x = 0;
+	while (line[x])
+	{
+		game->map[y][x] = line[x];
+		x++;
+	}
+	game->map[y][x] = '\0';
+}
+
 static void	fill_map(t_game *game, char *file)
 {
 	int		fd;
 	char	*line;
-	int		x;
 	int		y;
 	int		ret_gnl;
 
@@ -12,22 +25,22 @@ static void	fill_map(t_game *game, char *file)
 	ret_gnl = 1;
 	fd = open(file, O_RDONLY);
 	line = NULL;
-	while (ret_gnl > 0)
+	while (y <= game->map_size->y)
 	{
 		ret_gnl = get_next_line(fd, &line);
-		game->map[y] = (char *)malloc(sizeof(char) * (game->map_size->x + 1));
-		x = 0;
-		while (line[x])
+		if (!line && y == game->map_size->y)
 		{
-			game->map[y][x] = line[x];
-			x++;
+			game->map[y] = 0;
+			break ;
 		}
-		game->map[y][x] = '\0';
-		free(line);
-		line = NULL;
+		else if (!line)
+			error(game, "empty line in map");
+		else
+			fill_line(game, line, y);
+
+		ft_strdel(&line);
 		y++;
 	}
-	game->map[y] = 0;
 }
 
 static t_bool	count_lines(t_game *game, char *file)
@@ -62,10 +75,8 @@ static t_bool	count_lines(t_game *game, char *file)
 	return (SUCCESS);
 }
 
-void	parse_map(t_game *game, int argc, char *file)
+void	parse_map(t_game *game, char *file)
 {
-	if (argc != 2)
-		error(game, "invalid number of arg, must be 2 : <pgm> <map>");
 	if (!ft_strend_cmp(file, ".ber"))
 		error(game, "invalid format for the map : please use *.ber");
 	if (count_lines(game, file) == FAILURE)
@@ -75,4 +86,5 @@ void	parse_map(t_game *game, int argc, char *file)
 		error(game, "malloc failure on alloc_colums");
 	fill_map(game, file);
 	check_map(game, game->map);
+	get_positions(game);
 }
