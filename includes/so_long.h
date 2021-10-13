@@ -45,6 +45,7 @@ typedef struct s_image
 	t_vector	*size;
 	t_vector	*pos;
 	t_vector	*px_per_tile;
+	size_t		nb;
 }	t_image;
 
 typedef struct s_sprite_elem
@@ -73,6 +74,8 @@ typedef struct s_game
 	size_t			item_nb;
 }	t_game;
 
+void 		free_sprite_list(t_sprite_elem *first_elem);
+void		free_image(t_image *img);
 void		adapt_to_tile(t_game *game);
 void		check_map(t_game *game, char **map);
 int			close_w(t_game *game);

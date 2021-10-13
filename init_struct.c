@@ -60,4 +60,5 @@ void	init_game_struct(t_game *game)
 	game->first_exit = init_first_sprite_elem(game, EXIT);
 	game->first_item = init_first_sprite_elem(game, ITEM);
 	game->item_nb = 0;
+	game->exit_nb = 0;
 }

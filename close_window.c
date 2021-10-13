@@ -19,7 +19,8 @@ static void	destroy_sprites(t_game *game)
 	mlx_destroy_image(game->mlx, game->ground->ptr);
 	mlx_destroy_image(game->mlx, game->player->ptr);
 	destroy_sprite_list(game->mlx, game->first_exit);
-	destroy_sprite_list(game->mlx, game->first_item);
+	if (game->item_nb != 0)
+		destroy_sprite_list(game->mlx, game->first_item);
 }
 
 static void	destroy_display(t_game *game)

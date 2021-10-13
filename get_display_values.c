@@ -44,7 +44,7 @@ static void	insert_new_node(t_game *game, t_sprite_elem *sprite, int count, t_ve
 //	}
 }
 
-static void	get_elem_pos(t_game *game, t_sprite_elem *sprite, char letter)
+static int	get_elem_pos(t_game *game, t_sprite_elem *sprite, char letter)
 {
 	t_vector pos;
 	size_t	count;
@@ -67,6 +67,7 @@ static void	get_elem_pos(t_game *game, t_sprite_elem *sprite, char letter)
 	}
 	if (count == 0)
 		error(game, MISSING_SPRITE);
+	return (count);
 }
 
 static void	get_sprite_pos(t_game *game, t_image *sprite, int letter)
@@ -100,8 +101,8 @@ static void	get_sprite_pos(t_game *game, t_image *sprite, int letter)
 void	get_positions(t_game *game)
 {
 	get_sprite_pos(game, game->player, PLAYER);
-	get_elem_pos(game, game->first_exit, EXIT);
-	get_elem_pos(game, game->first_item, ITEM);
+	game->exit_nb = get_elem_pos(game, game->first_exit, EXIT);
+	game->item_nb = get_elem_pos(game, game->first_item, ITEM);
 }
 
 int	get_tile_size(t_vector img_size, t_vector res)

@@ -68,7 +68,8 @@ void	draw_sprites(t_game *game)
 {
 	draw_sprite(game, game->background, *game->player);
 	draw_sprite_list(game, game->background, game->first_exit);
-	draw_sprite_list(game, game->background, game->first_item);
+	if (game->item_nb != 0)
+		draw_sprite_list(game, game->background, game->first_item);
 }
 
 void	draw_window(t_game *game)

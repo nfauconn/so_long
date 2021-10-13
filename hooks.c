@@ -6,58 +6,88 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 20:14:39 by user42            #+#    #+#             */
-/*   Updated: 2021/10/12 23:04:16 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/13 13:08:45 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	delete_item(t_game *game, t_sprite_elem *first, int x, int y)
+/*
+void	del_top(t_game *game, t_sprite_elem *item)
 {
-	t_sprite_elem	**tmp;
+	t_sprite_elem	*tmp;
+	t_sprite_elem	**top;
 
-	tmp = &first;
-	if (first->image->pos->x == x && first->image->pos->y == y)
+	top = &game->first_item;
+	if (*top)
 	{
-		(*tmp = &first->next;
-		mlx_destroy_image(game->mlx, first->image->ptr);
-
+		if ((*top)->next == *top)
+		{
+			mlx_destroy_image(game->mlx, (*top)->image->ptr);
+			free_sprite_list(*top);
+			*top = NULL;
+		}
+		else
+		{
+			tmp = *top;
+			*top = (*top)->next;
+			tmp->prev->next = *top;
+			(*top)->prev = tmp->prev;
+			mlx_destroy_image(game->mlx, tmp->image->ptr);
+			free(tmp);
+		}
 	}
-	tmp = first->next;
-	while (tmp != first)
+}
+*/
+void	delete_item(t_game *game, int x, int y)
+{
+	t_sprite_elem	*tmp;
+	t_sprite_elem	**top;
+
+	while (game->first_item->image->pos->x != x && game->first_item->image->pos->y != y)
+		game->first_item = game->first_item->next;
+	top = &game->first_item;
+	if (*top)
 	{
-		if (tmp->image->pos->x == x && tmp->image->pos->y == y)
-			return (&tmp);
-		tmp = tmp->next;
+		if ((*top)->next == *top)
+		{
+			mlx_destroy_image(game->mlx, (*top)->image->ptr);
+			free_sprite_list(*top);
+			*top = NULL;
+		}
+		else
+		{
+			tmp = *top;
+			*top = (*top)->next;
+			tmp->prev->next = *top;
+			(*top)->prev = tmp->prev;
+			mlx_destroy_image(game->mlx, tmp->image->ptr);
+			free(tmp);
+		}
 	}
-	return (&tmp);
-
-
-item = which_item(game->first_item, x, y);
-		mlx_destroy_image(game->mlx, *(item->image->ptr));
-		*item->next->prev = *item->prev;
-		*item->prev->next = *item->next;
-		free(item);
+//	del_top(game, game->first_item);
 }
 
 int	check_dest(t_game *game, t_image *player, char **map, int x, int y)
 {
+	int				item_no;
 	t_vector		dest;
-	t_sprite_elem	**item;
 
+	item_no = 0;
 	dest = *player->pos;
 	if (map[dest.y][dest.x] == EXIT)
 	{
-		if (!game->first_item)
+		if (game->item_nb == 0)
 			close_w(game);
 		ft_printf("sorry you must have collected all snails before leaving\n");
 		player->pos->x = x;
 		player->pos->y = y;
 		return (0);
 	}
-	else if ((map[dest.y][dest.x] == ITEM) && game->first_item)
+	else if (map[dest.y][dest.x] == ITEM)
 	{
-		delete_item(game, game->first_item, x, y);
+		delete_item(game, x, y);
+		game->map[dest.y][dest.x] = '0';
+		game->item_nb--;
 	}
 	return (1);
 }

@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-static void	free_image(t_image *img)
+void	free_image(t_image *img)
 {
 	if (img->size)
 		free(img->size);
@@ -12,7 +12,7 @@ static void	free_image(t_image *img)
 		free(img);
 }
 
-static void free_sprite_list(t_sprite_elem *first_elem)
+void free_sprite_list(t_sprite_elem *first_elem)
 {
 	t_sprite_elem	*tmp;
 	t_sprite_elem	*to_free;
