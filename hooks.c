@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 20:14:39 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 22:22:31 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/14 23:18:09 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	key_hooked(int key, t_game *game)
 		close_w(game);
 	else
 		update_positions(game, game->player, key);
-	mlx_clear_window(game->mlx, game->window);
+//	mlx_clear_window(game->mlx, game->window);
 	draw_window(game);
 	mlx_put_image_to_window(game->mlx, game->window, game->display->ptr, 0, 0);
 	return (0);

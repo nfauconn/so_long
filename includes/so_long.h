@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 13:25:51 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 22:14:13 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/14 23:18:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_game
 	size_t			item_nb;
 }	t_game;
 
+//int			render_next_frame(t_game *game);
 void		free_sprite_list(t_sprite *first_elem);
 void		free_image(t_image *img);
 void		adapt_to_tile(t_game *game);
