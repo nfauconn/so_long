@@ -6,38 +6,32 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 13:32:43 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 13:44:58 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/14 18:43:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	insert_new_node(t_game *game, t_sprite_elem *sprite, int count, t_vector pos, char letter)
+void	insert_new_node(t_game *game, t_sprite *sprite, t_v pos, char c)
 {
-	t_sprite_elem	*new;
+	t_sprite	*new;
 
-	if (count == 1)
-	{
-		sprite->image->pos->x = pos.x;
-		sprite->image->pos->y = pos.y;
-		return ;
-	}
-	new = (t_sprite_elem *)malloc(sizeof (t_sprite_elem));
+	new = (t_sprite *)malloc(sizeof (t_sprite));
 	if (!new)
 		error(game, "malloc error in insert_new_node");
 	new->next = sprite;
 	new->prev = sprite->prev;
 	sprite->prev = new;
 	new->prev->next = new;
-	new->image = init_image_struct(game, letter);
+	new->image = init_image_struct(game, c);
 	new->image->pos->x = pos.x;
 	new->image->pos->y = pos.y;
 }
 
-static int	get_elem_pos(t_game *game, t_sprite_elem *sprite, char letter)
+static int	get_elem_pos(t_game *game, t_sprite *sprite, char letter)
 {
-	t_vector	pos;
-	size_t		count;
+	t_v		pos;
+	size_t	count;
 
 	count = 0;
 	pos.y = 0;
@@ -49,7 +43,10 @@ static int	get_elem_pos(t_game *game, t_sprite_elem *sprite, char letter)
 			if (game->map[pos.y][pos.x] == letter)
 			{
 				count++;
-				insert_new_node(game, sprite, count, pos, letter);
+				if (count == 1)
+					*sprite->image->pos = pos;
+				else
+					insert_new_node(game, sprite, pos, letter);
 			}
 			pos.x++;
 		}
@@ -62,8 +59,8 @@ static int	get_elem_pos(t_game *game, t_sprite_elem *sprite, char letter)
 
 static void	get_sprite_pos(t_game *game, t_image *sprite, int letter)
 {
-	t_vector	pos;
-	size_t		count;
+	t_v		pos;
+	size_t	count;
 
 	count = 0;
 	pos.y = 0;
@@ -92,12 +89,12 @@ void	get_positions(t_game *game)
 {
 	get_sprite_pos(game, game->player, PLAYER);
 	game->exit_nb = get_elem_pos(game, game->first_exit, EXIT);
-	game->item_nb = get_elem_pos(game, game->first_item, ITEM);
+	game->item_nb = get_elem_pos(game, game->item, ITEM);
 }
 
-int	get_tile_size(t_vector img_size, t_vector res)
+int	get_tile_size(t_v img_size, t_v res)
 {
-	t_vector	size;
+	t_v	size;
 
 	size.x = res.x / img_size.x;
 	size.y = res.y / img_size.y;

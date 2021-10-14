@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/10/14 12:27:30 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/14 18:40:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_vector
 {
 	int	x;
 	int	y;
-}	t_vector;
+}	t_v;
 
 typedef struct s_float_vector
 {
@@ -61,7 +61,7 @@ typedef struct s_list
 }	t_list;
 
 void		ft_strdel(char **as);
-t_vector	operate_vector(t_vector vector, char operation, int nb);
+t_v	operate_vector(t_v vector, char operation, int nb);
 int			ft_square_root(int nb);
 float		ft_negative_power(int nb, int power);
 t_ull		ft_power(int nb, int power);

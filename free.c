@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/14 18:42:17 by user42            #+#    #+#             */
+/*   Updated: 2021/10/14 19:08:15 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	free_image(t_image *img)
@@ -12,10 +24,10 @@ void	free_image(t_image *img)
 		free(img);
 }
 
-void free_sprite_list(t_sprite_elem *first_elem)
+void	free_sprite_list(t_sprite *first_elem)
 {
-	t_sprite_elem	**tmp;
-	t_sprite_elem	*to_free;
+	t_sprite	**tmp;
+	t_sprite	*to_free;
 
 	tmp = &first_elem->next;
 	while (*tmp != first_elem)
@@ -31,7 +43,7 @@ void free_sprite_list(t_sprite_elem *first_elem)
 
 static void	free_2d_table(char **tab)
 {
-	int y;
+	int	y;
 
 	y = 0;
 	while (tab[y])
@@ -51,8 +63,8 @@ void	free_game(t_game *game)
 		free(game->map_size);
 	if (game->screen_res)
 		free(game->screen_res);
-	if (game->background)
-		free_image(game->background);
+	if (game->display)
+		free_image(game->display);
 	if (game->ground)
 		free_image(game->ground);
 	if (game->wall)
@@ -61,8 +73,8 @@ void	free_game(t_game *game)
 		free_image(game->player);
 	if (game->first_exit)
 		free_sprite_list(game->first_exit);
-	if (game->first_item)
-		free_sprite_list(game->first_item);
+	if (game->item)
+		free_sprite_list(game->item);
 	if (game->mlx)
 		free(game->mlx);
 }

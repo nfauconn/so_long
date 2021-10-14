@@ -6,20 +6,34 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 20:14:39 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 13:28:48 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/14 19:56:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+static int	move_key(int key)
+{
+	if (key == UP || key == W)
+		return (UP);
+	else if (key == DOWN || key == S)
+		return (DOWN);
+	else if (key == RIGHT || key == D)
+		return (RIGHT);
+	else if (key == LEFT || key == A)
+		return (LEFT);
+	else
+		return (0);
+}
+
 void	delete_item(t_game *game, int x, int y)
 {
-	t_sprite_elem	*tmp;
-	t_sprite_elem	**top;
+	t_sprite	*tmp;
+	t_sprite	**top;
 
-	while (game->first_item->image->pos->x != x && game->first_item->image->pos->y != y)
-		game->first_item = game->first_item->next;
-	top = &game->first_item;
+	while (game->item->image->pos->x != x && game->item->image->pos->y != y)
+		game->item = game->item->next;
+	top = &game->item;
 	if (*top)
 	{
 		if ((*top)->next == *top)
@@ -41,94 +55,64 @@ void	delete_item(t_game *game, int x, int y)
 	}
 }
 
-int	check_dest(t_game *game, t_image *player, char **map, int x, int y)
+int	check_dest(t_game *game, t_image *player, t_v previous_pos)
 {
-	int				item_no;
-	t_vector		dest;
+	int		item_no;
+	t_v		dest;
 
 	item_no = 0;
 	dest = *player->pos;
-	if (map[dest.y][dest.x] == EXIT)
+	if (game->map[dest.y][dest.x] == EXIT)
 	{
 		if (game->item_nb == 0)
 			close_w(game);
 		ft_printf("sorry you must have collected all snails before leaving\n");
-		player->pos->x = x;
-		player->pos->y = y;
+		*player->pos = previous_pos;
 		return (0);
 	}
-	else if (map[dest.y][dest.x] == ITEM)
+	else if (game->map[dest.y][dest.x] == ITEM)
 	{
-		delete_item(game, x, y);
+		delete_item(game, dest.x, dest.y);
 		game->map[dest.y][dest.x] = '0';
 		game->item_nb--;
+	}
+	if (game->map[dest.y][dest.x] == WALL)
+	{
+		*player->pos = previous_pos;
+		return (0);
 	}
 	return (1);
 }
 
-void	update_positions(t_game *game, t_image *player, char **map, int key)
+void	update_positions(t_game *game, t_image *player, int key)
 {
 	static int	moves = 0;
-	int			x;
-	int			y;
+	t_v			previous_pos;
 
-	x = player->pos->x;
-	y = player->pos->y;
-	if ((key == UP || key == W) && map[y - 1][x] != WALL)
+	previous_pos = *player->pos;
+	if (move_key(key))
 	{
-		player->pos->y -= 1;
-		if (check_dest(game, player, map, x, y) == SUCCESS)
+		if (key == UP)
+			player->pos->y -= 1;
+		else if (key == LEFT)
+			player->pos->x -= 1;
+		else if (key == DOWN)
+			player->pos->y += 1;
+		else if (key == RIGHT)
+			player->pos->x += 1;
+		if (check_dest(game, player, previous_pos) == SUCCESS)
 			ft_printf("moves = %d\n", moves++);
 	}
-	else if ((key == LEFT || key == A) && map[y][x - 1] != WALL)
-	{
-		player->pos->x -= 1;
-		if (check_dest(game, player, map, x, y) == SUCCESS)
-				ft_printf("moves = %d\n", moves++);
-	}
-	else if ((key == DOWN || key == S) && map[y + 1][x] != WALL)
-	{
-		player->pos->y += 1;
-		if (check_dest(game, player, map, x, y) == SUCCESS)
-				ft_printf("moves = %d\n", moves++);
-	}
-	else if ((key == RIGHT || key == D) && map[y][x + 1] != WALL)
-	{
-		player->pos->x += 1;
-		if (check_dest(game, player, map, x, y) == SUCCESS)
-				ft_printf("moves = %d\n", moves++);
-	}
 }
+
 int	key_hooked(int key, t_game *game)
 {
 	if (key == ECHAP)
 		close_w(game);
 	else
-		update_positions(game, game->player, game->map, key);
+		update_positions(game, game->player, key);
 	mlx_clear_window(game->mlx, game->window);
 	draw_window(game);
-	mlx_put_image_to_window(game->mlx, game->window, game->background->ptr, 0, 0);
-	return (0);
-}
-
-int	update(t_game *game)
-{
-
-	(void)game;
-	mlx_clear_window(game->mlx, game->window);
-	static int	frame;
-
-	frame++;
-	if (frame == 2000)
-	{
-		game->player->pos->y += 1 / game->tile_size;
-	}
-	else if (frame >= 2000 * 2)
-	{
-		game->player->pos->y -= 1 / game->tile_size;
-		frame = 0;
-	}
-	draw_window(game);
-	mlx_put_image_to_window(game->mlx, game->window, game->background, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->window, game->display->ptr, 0, 0);
 	return (0);
 }
