@@ -6,13 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 16:24:05 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/10/12 11:33:26 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/14 12:25:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	appendline(char **s, char **line)
+static int	fill_line(char **s, char **line)
 {
 	int		len;
 	char	*tmp;
@@ -44,7 +44,7 @@ static int	output(char **s, char **line, int ret, int fd)
 	else if (ret == 0 && s[fd] == NULL)
 		return (0);
 	else
-		return (appendline(&s[fd], line));
+		return (fill_line(&s[fd], line));
 }
 
 int	get_next_line(const int fd, char **line)
@@ -56,7 +56,8 @@ int	get_next_line(const int fd, char **line)
 
 	if (fd < 0 || line == NULL)
 		return (-1);
-	while ((ret = read(fd, buff, BUFFER_SIZE)) > 0)
+	ret = read(fd, buff, BUFFER_SIZE);
+	while (ret > 0)
 	{
 		buff[ret] = '\0';
 		if (s[fd] == NULL)
@@ -69,6 +70,7 @@ int	get_next_line(const int fd, char **line)
 		}
 		if (ft_strchr(s[fd], '\n'))
 			break ;
+		ret = read(fd, buff, BUFFER_SIZE);
 	}
 	return (output(s, line, ret, fd));
 }

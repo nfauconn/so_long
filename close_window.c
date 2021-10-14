@@ -26,7 +26,6 @@ static void	destroy_sprites(t_game *game)
 static void	destroy_display(t_game *game)
 {
 	mlx_destroy_image(game->mlx, game->background->ptr);
-	mlx_destroy_image(game->mlx, game->sprites->ptr);
 	mlx_destroy_window(game->mlx, game->window);
 	mlx_destroy_display(game->mlx);	
 }

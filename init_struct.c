@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_struct.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/14 11:58:45 by user42            #+#    #+#             */
+/*   Updated: 2021/10/14 12:06:21 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 t_vector	*init_vector(t_game *game)
@@ -53,7 +65,6 @@ void	init_game_struct(t_game *game)
 	game->map_size = init_vector(game);
 	game->screen_res = init_vector(game);
 	game->background = init_image_struct(game, BACKGROUND_DISPLAY);
-	game->sprites = init_image_struct(game, SPRITES_DISPLAY);
 	game->wall = init_image_struct(game, WALL);
 	game->ground = init_image_struct(game, GROUND);
 	game->player = init_image_struct(game, PLAYER);

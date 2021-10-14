@@ -23,7 +23,7 @@ void	init_image_list(t_game *game, t_sprite_elem *first_sprite, char *texture)
 
 void	init_game_images(t_game *game)
 {
-	init_image(game, game->mlx, game->wall, "textures/walls.xpm");
+	init_image(game, game->mlx, game->wall, "textures/grass2.xpm");
 	init_image(game, game->mlx, game->ground, "textures/grass.xpm");
 	init_image(game, game->mlx, game->player, "textures/puck.xpm");
 	init_image_list(game, game->first_exit, "textures/exit.xpm");
@@ -56,6 +56,4 @@ void	init_screen(t_game *game)
 	init_window(game, game->screen_res, game->map_size, &game->tile_size);
 	init_game_images(game);
 	init_display(game, game->background);
-	init_display(game, game->sprites);
-//	color_background(game->sprites);
 }

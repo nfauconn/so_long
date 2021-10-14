@@ -17,8 +17,6 @@ void	draw_tile(t_game *game, t_image *display, t_image img, int startX, int star
 			color_pos.x = img.size->x / (100 / ((tile.x / tile_size) * 100.0));
 			color_pos.y = img.size->y / (100 / ((tile.y / tile_size) * 100.0));
 			color = get_pixel_color(img, color_pos.x, color_pos.y);
-			if (img.type == GROUND)
-				make_color_transparent(&img, color);
 			put_pixel_color(display, startX * tile_size + tile.x, startY * tile_size + tile.y, color);
 			tile.x++;
 		}

@@ -14,19 +14,19 @@ void	free_image(t_image *img)
 
 void free_sprite_list(t_sprite_elem *first_elem)
 {
-	t_sprite_elem	*tmp;
+	t_sprite_elem	**tmp;
 	t_sprite_elem	*to_free;
 
-	tmp = first_elem->next;
-	while (tmp != first_elem)
+	tmp = &first_elem->next;
+	while (*tmp != first_elem)
 	{
-		free_image(tmp->image);
-		to_free = tmp;
-		tmp = tmp->next;
+		free_image((*tmp)->image);
+		to_free = *tmp;
+		*tmp = (*tmp)->next;
 		free(to_free);
 	}
-	free_image(tmp->image);
-	free(tmp);
+	free_image((*tmp)->image);
+	free(*tmp);
 }
 
 static void	free_2d_table(char **tab)
@@ -53,8 +53,6 @@ void	free_game(t_game *game)
 		free(game->screen_res);
 	if (game->background)
 		free_image(game->background);
-	if (game->sprites)
-		free_image(game->sprites);
 	if (game->ground)
 		free_image(game->ground);
 	if (game->wall)

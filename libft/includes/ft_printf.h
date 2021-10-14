@@ -1,4 +1,19 @@
-#include "libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/14 12:28:47 by user42            #+#    #+#             */
+/*   Updated: 2021/10/14 12:28:49 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+
+# include "libft.h"
 
 # define BUFFSIZE 20
 # define CONVFLAGS "cspdiuxX%-0.*123456789"
@@ -66,3 +81,5 @@ int			main_loop(t_pf *pf, va_list *ap);
 void		parse_flag(t_pf *pf, t_conv *conv, va_list *ap);
 int			parse_conv(t_pf *pf);
 void		convert(va_list *ap, t_pf *pf);
+
+#endif

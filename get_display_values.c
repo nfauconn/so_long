@@ -1,53 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_display_values.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/14 13:32:43 by user42            #+#    #+#             */
+/*   Updated: 2021/10/14 13:44:58 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 static void	insert_new_node(t_game *game, t_sprite_elem *sprite, int count, t_vector pos, char letter)
 {
 	t_sprite_elem	*new;
 
-/*	if (sprite == ITEM)
+	if (count == 1)
 	{
-		if (count == 1)
-		{
-			game->first_item->image->pos->x = pos.x;
-			game->first_item->image->pos->y = pos.y;
-			return ;
-		}
-		new = (t_sprite_elem *)malloc(sizeof(t_sprite_elem));
-		if (!new)
-			error(game, "malloc error in insert_new_node");
-		new->next = game->first_item;
-		new->prev = game->first_item->prev;
-		game->first_item->prev = new;
-		new->prev->next = new;
-		new->image = init_image_struct(game, sprite);
-		new->image->pos->x = pos.x;
-		new->image->pos->y = pos.y;
+		sprite->image->pos->x = pos.x;
+		sprite->image->pos->y = pos.y;
+		return ;
 	}
-	if (sprite == EXIT)
-	{
-*/		if (count == 1)
-		{
-			sprite->image->pos->x = pos.x;
-			sprite->image->pos->y = pos.y;
-			return ;
-		}
-		new = (t_sprite_elem *)malloc(sizeof(t_sprite_elem));
-		if (!new)
-			error(game, "malloc error in insert_new_node");
-		new->next = sprite;
-		new->prev = sprite->prev;
-		sprite->prev = new;
-		new->prev->next = new;
-		new->image = init_image_struct(game, letter);
-		new->image->pos->x = pos.x;
-		new->image->pos->y = pos.y;
-//	}
+	new = (t_sprite_elem *)malloc(sizeof (t_sprite_elem));
+	if (!new)
+		error(game, "malloc error in insert_new_node");
+	new->next = sprite;
+	new->prev = sprite->prev;
+	sprite->prev = new;
+	new->prev->next = new;
+	new->image = init_image_struct(game, letter);
+	new->image->pos->x = pos.x;
+	new->image->pos->y = pos.y;
 }
 
 static int	get_elem_pos(t_game *game, t_sprite_elem *sprite, char letter)
 {
-	t_vector pos;
-	size_t	count;
+	t_vector	pos;
+	size_t		count;
 
 	count = 0;
 	pos.y = 0;
@@ -95,7 +85,7 @@ static void	get_sprite_pos(t_game *game, t_image *sprite, int letter)
 	if (count == 0)
 		error(game, MISSING_SPRITE);
 	if (count > 1 && letter == PLAYER)
-		error(game, "found multiple player position in map");
+		error(game, MULTIPLE_PLAYER);
 }
 
 void	get_positions(t_game *game)

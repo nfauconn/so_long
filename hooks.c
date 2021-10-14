@@ -6,38 +6,12 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 20:14:39 by user42            #+#    #+#             */
-/*   Updated: 2021/10/13 13:08:45 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/14 13:28:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-/*
-void	del_top(t_game *game, t_sprite_elem *item)
-{
-	t_sprite_elem	*tmp;
-	t_sprite_elem	**top;
 
-	top = &game->first_item;
-	if (*top)
-	{
-		if ((*top)->next == *top)
-		{
-			mlx_destroy_image(game->mlx, (*top)->image->ptr);
-			free_sprite_list(*top);
-			*top = NULL;
-		}
-		else
-		{
-			tmp = *top;
-			*top = (*top)->next;
-			tmp->prev->next = *top;
-			(*top)->prev = tmp->prev;
-			mlx_destroy_image(game->mlx, tmp->image->ptr);
-			free(tmp);
-		}
-	}
-}
-*/
 void	delete_item(t_game *game, int x, int y)
 {
 	t_sprite_elem	*tmp;
@@ -61,10 +35,10 @@ void	delete_item(t_game *game, int x, int y)
 			tmp->prev->next = *top;
 			(*top)->prev = tmp->prev;
 			mlx_destroy_image(game->mlx, tmp->image->ptr);
+			free_image(tmp->image);
 			free(tmp);
 		}
 	}
-//	del_top(game, game->first_item);
 }
 
 int	check_dest(t_game *game, t_image *player, char **map, int x, int y)

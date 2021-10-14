@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/10/12 11:37:38 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/14 12:27:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,9 @@ void		ft_putstr_fd(char *s, int fd);
 void		ft_putendl_fd(char *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
 int			*sort_int_tab(int *tab, int size);
-int	ft_strend_cmp(char *name, char *end);
+int			ft_strend_cmp(char *name, char *end);
 int			str_isdigit(char *str);
 void		rev_int_tab(int *tab, int size);
-int	get_next_line(int fd, char **line);
-
+int			get_next_line(int fd, char **line);
 
 #endif

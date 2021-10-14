@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/14 13:25:51 by user42            #+#    #+#             */
+/*   Updated: 2021/10/14 13:32:27 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -19,13 +31,20 @@
 # define PLAYER 'P'
 # define ITEM 'C'
 # define EXIT 'E'
-# define SPRITES_DISPLAY 's'
 # define BACKGROUND_DISPLAY 'd'
 # define BPP bits_per_pixel
 # define PPT px_per_line
-# define MISSING_SPRITE "missing sprite in map, minimum = one of each (P, E, C)"
 # define BLACK "0xFF000000"
-
+# define MISSING_SPRITE "missing sprite in map"
+# define INVALID_NB_ARG "invalid number of arg, must be 2 : <pgm> <map>"
+# define INVALID_FORMAT "invalid format for the map : please use *.ber"
+# define WRONG_FD "please verify that file exists / is not a directory"
+# define MAP_ALLOC_ERR "malloc failure of game->map"
+# define EMPTY_LINE "empty line in map"
+# define RECTANGLE_SHAPE "map must be a rectangle"
+# define INVALID_CHAR "invalid character in map"
+# define NOT_CLOSED "map not closed"
+# define MULTIPLE_PLAYER "found multiple player position in map"
 typedef struct s_color
 {
 	int	r;
@@ -64,7 +83,6 @@ typedef struct s_game
 	t_vector		*map_size;
 	t_vector		*screen_res;
 	t_image			*background;
-	t_image			*sprites;
 	t_image			*ground;
 	t_image			*wall;
 	t_image			*player;

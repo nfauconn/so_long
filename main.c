@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/14 11:57:53 by user42            #+#    #+#             */
+/*   Updated: 2021/10/14 12:04:53 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	main(int argc, char **argv)
@@ -13,6 +25,6 @@ int	main(int argc, char **argv)
 		free_game(&game);
 	}
 	else
-		error(&game, "invalid number of arg, must be 2 : <pgm> <map>");
+		error(&game, INVALID_NB_ARG);
 	return (0);
 }
