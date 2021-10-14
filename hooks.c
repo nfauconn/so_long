@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 20:14:39 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 22:20:20 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/14 22:22:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	update_positions(t_game *game, t_image *player, int keycode)
 	static int	moves = 1;
 	int			key;
 	t_v			previous_pos;
-	int			dest;
+	int			dest_ok;
 
 	previous_pos = *player->pos;
 	key = is_move_key(keycode);
@@ -103,14 +103,11 @@ void	update_positions(t_game *game, t_image *player, int keycode)
 			player->pos->y += 1;
 		else if (key == RIGHT)
 			player->pos->x += 1;
-		dest = check_dest(game, player, previous_pos);
-		if (dest == SUCCESS)
+		dest_ok = check_dest(game, player, previous_pos);
+		if (dest_ok)
 			ft_printf("moves = %d\n", moves++);
-		else if (dest == END)
-		{
-			ft_printf("moves = %d\n", moves);
+		if (dest_ok == END)
 			ft_printf("you win in %d moves\n", moves);
-		}
 	}
 }
 
