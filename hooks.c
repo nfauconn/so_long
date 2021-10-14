@@ -6,13 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 20:14:39 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 19:56:28 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/14 22:20:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	move_key(int key)
+static int	is_move_key(int key)
 {
 	if (key == UP || key == W)
 		return (UP);
@@ -65,12 +65,12 @@ int	check_dest(t_game *game, t_image *player, t_v previous_pos)
 	if (game->map[dest.y][dest.x] == EXIT)
 	{
 		if (game->item_nb == 0)
-			close_w(game);
+			return (2);
 		ft_printf("sorry you must have collected all snails before leaving\n");
 		*player->pos = previous_pos;
 		return (0);
 	}
-	else if (game->map[dest.y][dest.x] == ITEM)
+	if (game->map[dest.y][dest.x] == ITEM)
 	{
 		delete_item(game, dest.x, dest.y);
 		game->map[dest.y][dest.x] = '0';
@@ -84,13 +84,16 @@ int	check_dest(t_game *game, t_image *player, t_v previous_pos)
 	return (1);
 }
 
-void	update_positions(t_game *game, t_image *player, int key)
+void	update_positions(t_game *game, t_image *player, int keycode)
 {
-	static int	moves = 0;
+	static int	moves = 1;
+	int			key;
 	t_v			previous_pos;
+	int			dest;
 
 	previous_pos = *player->pos;
-	if (move_key(key))
+	key = is_move_key(keycode);
+	if (key)
 	{
 		if (key == UP)
 			player->pos->y -= 1;
@@ -100,8 +103,14 @@ void	update_positions(t_game *game, t_image *player, int key)
 			player->pos->y += 1;
 		else if (key == RIGHT)
 			player->pos->x += 1;
-		if (check_dest(game, player, previous_pos) == SUCCESS)
+		dest = check_dest(game, player, previous_pos);
+		if (dest == SUCCESS)
 			ft_printf("moves = %d\n", moves++);
+		else if (dest == END)
+		{
+			ft_printf("moves = %d\n", moves);
+			ft_printf("you win in %d moves\n", moves);
+		}
 	}
 }
 

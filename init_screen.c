@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:30:18 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 20:13:20 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/14 22:08:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	init_display(t_game *game, t_image *disp)
 			disp->size->x, disp->size->y);
 	disp->addr = mlx_get_data_addr(disp->ptr,
 			&disp->bits_per_pixel, &disp->size_line, &disp->endian);
-	init_image(game, game->mlx, game->wall, "textures/grass2.xpm");
-	init_image(game, game->mlx, game->ground, "textures/grass.xpm");
+	init_image(game, game->mlx, game->wall, "textures/wallnothing.xpm");
+	init_image(game, game->mlx, game->ground, "textures/floor.xpm");
 	init_image(game, game->mlx, game->player, "textures/puck.xpm");
-	init_image_list(game, game->first_exit, "textures/exit.xpm");
+	init_image_list(game, game->first_exit, "textures/stairs.xpm");
 	init_image_list(game, game->item, "textures/snail.xpm");
 }
 

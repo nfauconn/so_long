@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 11:57:53 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 12:04:53 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/14 21:00:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ int	main(int argc, char **argv)
 		free_game(&game);
 	}
 	else
-		error(&game, INVALID_NB_ARG);
+	{
+		ft_putstr_fd(INVALID_NB_ARG, 2);
+		ft_putstr_fd("\n", 2);
+	}
 	return (0);
 }

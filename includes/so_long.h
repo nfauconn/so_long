@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 13:25:51 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 20:45:24 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/14 22:14:13 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@
 # define PLAYER 'P'
 # define ITEM 'C'
 # define EXIT 'E'
+# define END 2
 # define BLACK 0xFF000000
-# define WHITE 0xFFFFFF
+# define WHITE 0xffffff
 # define MISSING_SPRITE "missing sprite in map"
 # define INVALID_NB_ARG "invalid number of arg, must be 2 : <pgm> <map>"
 # define INVALID_FORMAT "invalid format for the map : please use *.ber"

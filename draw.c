@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 16:15:17 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 20:49:08 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/14 21:25:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	draw_tile(t_game *g, t_image *disp, t_image img, t_v map)
 			color = get_pixel_color(img, color_pos.x, color_pos.y);
 			pixel_pos.x = map.x * tile_sz + tile.x;
 			pixel_pos.y = map.y * tile_sz + tile.y;
-			put_pixel_color(disp, pixel_pos.x, pixel_pos.y, color);
+			if (*(t_uint *)color != (t_uint)BLACK && *(t_uint *)color != WHITE)
+				put_pixel_color(disp, pixel_pos.x, pixel_pos.y, color);
 			tile.x++;
 		}
 		tile.y++;

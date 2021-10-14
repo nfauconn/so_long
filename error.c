@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:06:04 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 18:06:24 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/14 20:57:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	error(t_game *game, char *s)
 	ft_putstr_fd("error\n", 2);
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd("\n", 2);
-	free_game(game);
+	if (game)
+		free_game(game);
 	exit(0);
 }
