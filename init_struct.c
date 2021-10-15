@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 11:58:45 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 20:09:15 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/15 13:11:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	init_game_struct(t_game *game)
 	game->screen_res = init_vector(game);
 	game->display = init_image_struct(game, DISPLAY);
 	game->wall = init_image_struct(game, WALL);
-	game->ground = init_image_struct(game, GROUND);
+	game->floor = init_image_struct(game, FLOOR);
 	game->player = init_image_struct(game, PLAYER);
 	game->first_exit = init_first_sprite(game, EXIT);
 	game->item = init_first_sprite(game, ITEM);

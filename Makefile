@@ -27,15 +27,10 @@ $(NAME): ${OBJS}
 all: ${NAME}
 
 val: ${NAME}
-	valgrind \
-	--leak-check=full --tool=memcheck \
-	--show-reachable=yes \
-	--track-fds=yes \
-	--errors-for-leak-kinds=all \
-	--show-leak-kinds=all ./${NAME}
+	valgrind ./${NAME}
 
-exe: ${NAME}
-	./${NAME}
+norm: ${NAME}
+	norminette ${SRCS} includes/*.h ${LIBFT}
 
 clean:
 	@make clean -C libft

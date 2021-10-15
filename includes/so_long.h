@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 13:25:51 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 23:18:25 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/15 13:16:59 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define D 100
 # define DISPLAY 'd'
 # define WALL '1'
-# define GROUND '0'
+# define FLOOR '0'
 # define PLAYER 'P'
 # define ITEM 'C'
 # define EXIT 'E'
@@ -37,14 +37,18 @@
 # define WHITE 0xffffff
 # define MISSING_SPRITE "missing sprite in map"
 # define INVALID_NB_ARG "invalid number of arg, must be 2 : <pgm> <map>"
+# define BER_EXT ".ber"
 # define INVALID_FORMAT "invalid format for the map : please use *.ber"
+# define INT_MAX_REACHED "number of columns cannot be superior to INT_MAX\n"
 # define WRONG_FD "wrong fd or missing correct access rights"
 # define MAP_ALLOC_ERR "malloc failure of game->map"
-# define EMPTY_LINE "empty line in map"
+# define EMPTY_LINE "empty line in map / empty map"
 # define RECTANGLE_SHAPE "map must be a rectangle"
+# define VALID_CHAR "01CEP"
 # define INVALID_CHAR "invalid character in map"
 # define NOT_CLOSED "map not closed"
 # define MULTIPLE_PLAYER "found multiple player position in map"
+# define MLX_INIT_FAILED  "start : failed to initialize mlx"
 
 typedef struct s_color
 {
@@ -84,7 +88,7 @@ typedef struct s_game
 	t_v				*map_size;
 	t_v				*screen_res;
 	t_image			*display;
-	t_image			*ground;
+	t_image			*floor;
 	t_image			*wall;
 	t_image			*player;
 	t_sprite		*first_exit;
@@ -93,7 +97,6 @@ typedef struct s_game
 	size_t			item_nb;
 }	t_game;
 
-//int			render_next_frame(t_game *game);
 void		free_sprite_list(t_sprite *first_elem);
 void		free_image(t_image *img);
 void		adapt_to_tile(t_game *game);

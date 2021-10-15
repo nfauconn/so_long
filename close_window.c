@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:05:07 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 19:07:49 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/15 13:11:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	destroy_sprite_list(void *mlx, t_sprite *first_elem)
 static void	destroy_sprites(t_game *game)
 {
 	mlx_destroy_image(game->mlx, game->wall->ptr);
-	mlx_destroy_image(game->mlx, game->ground->ptr);
+	mlx_destroy_image(game->mlx, game->floor->ptr);
 	mlx_destroy_image(game->mlx, game->player->ptr);
 	destroy_sprite_list(game->mlx, game->first_exit);
 	if (game->item_nb != 0)

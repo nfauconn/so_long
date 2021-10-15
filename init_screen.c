@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:30:18 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 23:17:38 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/15 13:11:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	init_display(t_game *game, t_image *disp)
 	disp->addr = mlx_get_data_addr(disp->ptr,
 			&disp->bits_per_pixel, &disp->size_line, &disp->endian);
 	init_image(game, game->mlx, game->wall, "textures/wallnothing.xpm");
-	init_image(game, game->mlx, game->ground, "textures/floor.xpm");
+	init_image(game, game->mlx, game->floor, "textures/floor.xpm");
 	init_image(game, game->mlx, game->player, "textures/puck.xpm");
 	init_image_list(game, game->first_exit, "textures/stairs.xpm");
 	init_image_list(game, game->item, "textures/snail.xpm");
@@ -51,7 +51,7 @@ void	init_window(t_game *game, t_v *res, t_v *map_sz, int *tile_sz)
 {
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		error(game, "start : failed to initialize mlx");
+		error(game, MLX_INIT_FAILED);
 	mlx_get_screen_size(game->mlx, &res->x, &res->y);
 	if (map_sz->x > res->x || map_sz->y > res->y)
 		error(game, "map is too big for screen resolution");
@@ -65,5 +65,4 @@ void	init_screen(t_game *game)
 {
 	init_window(game, game->screen_res, game->map_size, &game->tile_size);
 	init_display(game, game->display);
-	mlx_put_image_to_window(game->mlx, game->window, game->display->ptr, 0, 0);
 }

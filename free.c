@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:42:17 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 19:08:15 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/15 13:11:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	free_game(t_game *game)
 		free(game->screen_res);
 	if (game->display)
 		free_image(game->display);
-	if (game->ground)
-		free_image(game->ground);
+	if (game->floor)
+		free_image(game->floor);
 	if (game->wall)
 		free_image(game->wall);
 	if (game->player)

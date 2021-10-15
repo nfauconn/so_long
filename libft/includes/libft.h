@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 16:22:20 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/10/14 21:24:49 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/15 12:35:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define BUFFER_SIZE 100
 # define FD_MAX 10240
 
-typedef unsigned int	t_uint;
+typedef unsigned int		t_uint;
 typedef unsigned long long	t_ull;
 
 typedef enum e_bool

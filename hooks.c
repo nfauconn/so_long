@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 20:14:39 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 23:18:09 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/15 13:23:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	delete_item(t_game *game, int x, int y)
 	t_sprite	*tmp;
 	t_sprite	**top;
 
-	while (game->item->image->pos->x != x && game->item->image->pos->y != y)
+	while (game->item->image->pos->x != x || game->item->image->pos->y != y)
 		game->item = game->item->next;
 	top = &game->item;
 	if (*top)
@@ -84,15 +84,14 @@ int	check_dest(t_game *game, t_image *player, t_v previous_pos)
 	return (1);
 }
 
-void	update_positions(t_game *game, t_image *player, int keycode)
+void	update_positions(t_game *game, t_image *player, int key)
 {
 	static int	moves = 1;
-	int			key;
 	t_v			previous_pos;
 	int			dest_ok;
 
 	previous_pos = *player->pos;
-	key = is_move_key(keycode);
+	key = is_move_key(key);
 	if (key)
 	{
 		if (key == UP)
@@ -107,17 +106,22 @@ void	update_positions(t_game *game, t_image *player, int keycode)
 		if (dest_ok)
 			ft_printf("moves = %d\n", moves++);
 		if (dest_ok == END)
-			ft_printf("you win in %d moves\n", moves);
+		{
+			ft_printf("you win in %d moves <:}\n", (moves - 1));
+			close_w(game);
+		}
 	}
 }
 
 int	key_hooked(int key, t_game *game)
 {
 	if (key == ECHAP)
+	{
+		ft_printf("goodbye !\n");
 		close_w(game);
+	}
 	else
 		update_positions(game, game->player, key);
-//	mlx_clear_window(game->mlx, game->window);
 	draw_window(game);
 	mlx_put_image_to_window(game->mlx, game->window, game->display->ptr, 0, 0);
 	return (0);

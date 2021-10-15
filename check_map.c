@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 13:28:33 by user42            #+#    #+#             */
-/*   Updated: 2021/10/14 18:04:10 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/15 13:00:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	check_middle_line(t_game *game, char *line, size_t line_len)
 	i = 0;
 	while (line[i])
 	{
-		if (!ft_strchr("01CEP", line[i]))
+		if (!ft_strchr(VALID_CHAR, line[i]))
 			error(game, INVALID_CHAR);
 		if (i == 0 || i == line_len)
 		{
@@ -67,4 +67,5 @@ void	check_map(t_game *game, char **map)
 		y++;
 	}
 	game->map_size->x = line_len;
+	game->map_size->y -= 1;
 }
