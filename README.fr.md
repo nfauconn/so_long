@@ -25,6 +25,8 @@ Les autres objectifs sont similaires à tous les autres objectifs de cette premi
 ### Comment exécuter
 
 ```
+> git clone git@github.com:nfauconn/so_long.git
+> 
 > make
 > ./so_long <carte>
 ```
