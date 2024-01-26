@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 20:14:39 by user42            #+#    #+#             */
-/*   Updated: 2021/10/15 13:23:55 by user42           ###   ########.fr       */
+/*   Updated: 2024/01/26 12:09:07 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,8 @@ void	delete_item(t_game *game, int x, int y)
 
 int	check_dest(t_game *game, t_image *player, t_v previous_pos)
 {
-	int		item_no;
 	t_v		dest;
 
-	item_no = 0;
 	dest = *player->pos;
 	if (game->map[dest.y][dest.x] == EXIT)
 	{

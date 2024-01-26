@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 12:03:18 by user42            #+#    #+#             */
-/*   Updated: 2021/10/15 13:07:13 by user42           ###   ########.fr       */
+/*   Updated: 2024/01/26 12:09:40 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,13 @@ static int	fill_map(t_game *game, char *file)
 	int		fd;
 	char	*line;
 	int		y;
-	int		ret_gnl;
 
 	y = 0;
-	ret_gnl = 1;
 	fd = open(file, O_RDONLY);
 	line = NULL;
 	while (y <= game->map_size->y)
 	{
-		ret_gnl = get_next_line(fd, &line);
+		get_next_line(fd, &line);
 		if (!line && y == game->map_size->y)
 		{
 			game->map[y] = 0;

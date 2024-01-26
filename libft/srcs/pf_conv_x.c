@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pf_conv_x.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 22:58:14 by nfauconn          #+#    #+#             */
-/*   Updated: 2021/09/26 13:35:08 by user42           ###   ########.fr       */
+/*   Updated: 2024/01/26 12:16:45 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	conv_x(va_list *ap, t_conv *conv)
 		conv_p(ap, conv);
 		return ;
 	}
-	i = (unsigned int)va_arg(*ap, void *);
+	i = va_arg(*ap, unsigned int);
 	nb_to_array(conv, &str, &i);
 	conv->len = ft_strlen(str);
 	if (i != 0 && (conv->prec <= conv->len) && (conv->width <= (conv->len)))

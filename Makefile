@@ -3,7 +3,7 @@ LIBFT = libft
 LIB = libft/libft.a
 SRC_DIR  = ./srcs
 OBJ_DIR  = ./objs
-CC = clang
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -g# -fsanitize=address
 LD_FLAGS = -L libft -L mlx
 MLX_FLAGS = -lm -lmlx -lXext -lX11
