@@ -1,1 +1,11 @@
 .vs_code
+
+objs
+so_long
+
+libft.a
+libft/objs
+libft/libft.a
+
+mlx/*.a
+mlx/obj
