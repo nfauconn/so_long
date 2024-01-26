@@ -33,10 +33,6 @@ Les cartes sont situées dans `maps/`
 
 ## 💡 Apprentissage 💡
 
-### 🌐 Langage : C 🌐
-
-### 🔧 Pratiques et outils de développement 🔧
-
 1. **Gestion des fenêtres et des événements :**
    - Créer et gérer des fenêtres en utilisant la bibliothèque MiniLibX
    - Rendre des graphiques dans une fenêtre

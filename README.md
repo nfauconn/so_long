@@ -30,11 +30,7 @@ The other goals are similar to every other goal for this first year: being rigor
 ```
 Maps are located in `maps/`.
 
-## 💡 Learning 💡
-
-### 🌐 Language: C 🌐
-
-### 🔧 Development Practices and Tools 🔧
+## 💡 Skills 💡
 
 1. **Window Management and Event Handling:**
    - Create and manage windows using the MiniLibX library
