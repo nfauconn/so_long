@@ -11,7 +11,7 @@ Tools used : the school graphical library: the MiniLibX. This library was develo
 
 The other goals are similar to every other goal for this first year: being rigorous, level up in C programming, use basic algorithms, do some information research, and so forth.
 
-## Usage
+## 🚀 Usage 🚀
 
 ### Requirements for Linux
 
@@ -28,8 +28,7 @@ The other goals are similar to every other goal for this first year: being rigor
 > make
 > ./so_long <map>
 ```
-Maps are located in `maps/`
-
+Maps are located in `maps/`.
 
 ## 💡 Learning 💡
 

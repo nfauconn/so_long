@@ -11,7 +11,7 @@ Outils utilisés : la bibliothèque graphique de l'école : la MiniLibX. Cette b
 
 Les autres objectifs sont similaires à tous les autres objectifs de cette première année : être rigoureux, progresser en programmation en C, utiliser des algorithmes de base, faire des recherches d'informations, etc.
 
-## Utilisation
+## 🚀 Utilisation 🚀
 
 ### Prérequis pour Linux
 
