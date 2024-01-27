@@ -25,10 +25,15 @@ The other goals are similar to every other goal for this first year: being rigor
 ### How to run
 
 ```shell
-> make
-> ./so_long <map>
+git clone git@github.com:nfauconn/so_long.git
+cd Project
+make
 ```
+
 Maps are located in `maps/`.
+```shell
+./so_long <map>
+```
 
 ## 💡 Skills 💡
 

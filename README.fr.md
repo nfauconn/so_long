@@ -24,14 +24,17 @@ Les autres objectifs sont similaires à tous les autres objectifs de cette premi
 
 ### Comment exécuter
 
+```shell
+git clone git@github.com:nfauconn/so_long.git
+cd Project
+make
 ```
-> git clone git@github.com:nfauconn/so_long.git
-> 
-> make
-> ./so_long <carte>
-```
+
 Les cartes sont situées dans `maps/`
 
+```shell
+./so_long <carte>
+```
 
 ## 💡 Apprentissage 💡
 
