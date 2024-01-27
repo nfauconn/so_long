@@ -26,7 +26,7 @@ The other goals are similar to every other goal for this first year: being rigor
 
 ```shell
 git clone git@github.com:nfauconn/so_long.git
-cd Project
+cd so_long/Project
 make
 ```
 

@@ -26,7 +26,7 @@ Les autres objectifs sont similaires à tous les autres objectifs de cette premi
 
 ```shell
 git clone git@github.com:nfauconn/so_long.git
-cd Project
+cd so_long/Project
 make
 ```
 
