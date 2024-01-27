@@ -1,11 +1,11 @@
 .vs_code
 
-objs
-so_long
+Project/objs
+Project/so_long
 
-libft.a
-libft/objs
-libft/libft.a
+Project/libft.a
+Project/libft/objs
+Project/libft/libft.a
 
-mlx/*.a
-mlx/obj
+Project/mlx/*.a
+Project/mlx/obj
