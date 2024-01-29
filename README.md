@@ -66,7 +66,6 @@ Maps are located in `maps/`.
 
 ## 📋 Subject 📋
 
-Solo project
 
 ### Common Instructions
 

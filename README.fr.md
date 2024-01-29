@@ -66,8 +66,7 @@ Les cartes sont situées dans `maps/`
    - Me préparer pour l'évaluation par les pairs en m'assurant que mon code est lisible, bien documenté et respecte les normes du projet
 
 ## 📋 Sujet 📋
-
-Projet individuel.
+.
 
 ### Instructions communes
 
