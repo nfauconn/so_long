@@ -6,7 +6,7 @@
 /*   By: nfauconn <nfauconn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 12:03:18 by nfauconn          #+#    #+#             */
-/*   Updated: 2024/01/26 13:32:37 by nfauconn         ###   ########.fr       */
+/*   Updated: 2024/01/29 13:09:34 by nfauconn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	fill_line(t_game *game, char *line, size_t len, int y)
 {
 	int	x;
 
-	game->map[y] = (char *)malloc(sizeof(char) * (len + 1));
+	game->map[y] = malloc(sizeof(char) * (len + 1));
 	x = 0;
 	while (line[x])
 	{
