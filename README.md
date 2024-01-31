@@ -9,6 +9,7 @@ A small 2D game to learn window management, event handling, colors, textures, an
 
 - Tools used: The school graphical library: the MiniLibX. This library was developed internally and includes basic necessary tools to open a window, create images, and deal with keyboard and mouse events.
 
+|||
 | --- | --- |
 | Program name | `so_long` |
 | Language | C |
