@@ -1,11 +1,22 @@
 [![en](https://img.shields.io/badge/lang-en-pink.svg)](https://github.com/nfauconn/so_long/blob/master/README.md)
 [![fr](https://img.shields.io/badge/lang-fr-purple.svg)](https://github.com/nfauconn/so_long/blob/master/README.fr.md)
 
+*C Programming Language* • *Window Management and Event Handling* • *Working with 2D Graphics* • *Understanding and Implementing Game Mechanics* • *Map Parsing and Validation* • *Memory Management* • *Makefile and Project Organization* 
+
 # So Long
 
 A small 2D game to learn window management, event handling, colors, textures, and so forth.
 
 - Tools used: The school graphical library: the MiniLibX. This library was developed internally and includes basic necessary tools to open a window, create images, and deal with keyboard and mouse events.
+
+| Program name | `so_long` |
+| --- | --- |
+| Language | C |
+| Turn in files | `Makefile`, `*.h`, `*.c`, `maps`, `textures` |
+| Makefile | `NAME`, `all`, `clean`, `fclean`, `re` |
+| Arguments | A map in format `*.ber` |
+| External functs. allowed | `open`, `close`, `read`, `write`, `malloc`, `free`, `perror`, `strerror`, `exit`<br>All functions of the math library (`-lm` compiler option, `man man 3 math`)<br>All functions of the MiniLibX<br> |
+
 
 ## Usage
 
@@ -27,6 +38,9 @@ make
 ```shell
 ./so_long <map.ber>
 ```
+
+- The goal is to collect every collectible present on the map then escape choosing the shortest possible route.
+- Use the `W`, `A`, `S`, and `D` keys to move the main character.
 
 Maps are located in `maps/`.
 You can write your own if you want. The map must have the `.ber` extension. Here are the rules to follow:
@@ -65,47 +79,5 @@ Another example of a minimal `.ber` map:
 1111111111111111111111111111111111
 ```
 
-## Gameplay
-- The goal is to collect every collectible present on the map then escape choosing the shortest possible route.
-- Use the `W`, `A`, `S`, and `D` keys to move the main character.
-
-## Description
 
 
-| Program name | `so_long` |
-| --- | --- |
-| Language | C |
-| Turn in files | `Makefile`, `*.h`, `*.c`, `maps`, `textures` |
-| Makefile | `NAME`, `all`, `clean`, `fclean`, `re` |
-| Arguments | A map in format `*.ber` |
-| External functs. allowed | `open`, `close`, `read`, `write`, `malloc`, `free`, `perror`, `strerror`, `exit`<br>All functions of the math library (`-lm` compiler option, `man man 3 math`)<br>All functions of the MiniLibX<br> |
-
-
-## Skills
-
-1. **Window Management and Event Handling:**
-   - Create and manage windows using the MiniLibX library
-   - Rendering graphics inside a window
-   - Handling events like keyboard inputs and window closing
-
-2. **Working with 2D Graphics:**
-   - Drawing, managing textures
-
-3. **Understanding and Implementing Game Mechanics:**
-   - Player movement, collision detection, game objectives (collecting items and reaching the exit)
-
-4. **Map Parsing and Validation:**
-   - Reading and parsing map files, ensuring they meet specific criteria (rectangular shape, enclosed by walls, contains necessary elements)
-   - Error handling for map configuration issues, ensuring the program exits cleanly with an informative error message
-
-5. **Memory Management:**
-   - Managing memory by properly allocating and freeing space, ensuring no memory leaks occurred
-   - Importance of robustness in software design, especially in handling unexpected situations like segmentation faults or bus errors
-
-6. **Makefile and Project Organization:**
-   - Automate the compilation process, managing dependencies and compilation flags effectively
-   - Understood the importance of organizing code into separate files and folders for clarity and maintainability
-
-7. **Peer-Evaluation and Version Control:**
-   - Submitting my work to a Git repository
-   - Preparing for peer-evaluation by ensuring my code is readable, well-documented, and adheres to the project's coding standards
