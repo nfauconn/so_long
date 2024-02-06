@@ -9,3 +9,5 @@ Project/libft/libft.a
 
 Project/mlx/*.a
 Project/mlx/obj
+Project/mlx/test/*.o
+Project/mlx/test/mlx-test
