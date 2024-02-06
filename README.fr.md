@@ -32,7 +32,7 @@ Un petit jeu 2D pour apprendre la gestion des fenêtres, le traitement des évé
 
 ```shell
 git clone git@github.com:nfauconn/so_long.git
-cd so_long/Projet
+cd so_long/Project
 make
 ```
 
