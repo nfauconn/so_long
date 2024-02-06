@@ -28,7 +28,7 @@ Un petit jeu 2D pour apprendre la gestion des fenêtres, le traitement des évé
 - L'extension XShm doit être présente (paquet `libxext-dev`)
 - Fonctions utilitaires des systèmes BSD - fichiers de développement (paquet `libbsd-dev`)
 
-### Comment exécuter
+### Exécution
 
 ```shell
 git clone git@github.com:nfauconn/so_long.git
