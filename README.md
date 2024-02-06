@@ -17,6 +17,7 @@ A small 2D game to learn window management, event handling, colors, textures, an
 | Makefile | `NAME`, `all`, `clean`, `fclean`, `re` |
 | Arguments | A map in format `*.ber` |
 | External functs. allowed | `open`, `close`, `read`, `write`, `malloc`, `free`, `perror`, `strerror`, `exit`<br>All functions of the math library (`-lm` compiler option, `man man 3 math`)<br>All functions of the MiniLibX<br> |
+| Global variables allowed | None |
 
 
 ## Usage
@@ -79,6 +80,3 @@ Another example of a minimal `.ber` map:
 1P0000000C00C0000000000000000000C1
 1111111111111111111111111111111111
 ```
-
-
-
