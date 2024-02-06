@@ -19,7 +19,6 @@ A small 2D game to learn window management, event handling, colors, textures, an
 | External functs. allowed | `open`, `close`, `read`, `write`, `malloc`, `free`, `perror`, `strerror`, `exit`<br>All functions of the math library (`-lm` compiler option, `man man 3 math`)<br>All functions of the MiniLibX<br> |
 | Global variables allowed | None |
 
-
 ## Usage
 
 ### Requirements for Linux
@@ -55,28 +54,29 @@ You can write your own if you want. The map must have the `.ber` extension. Here
   - `E` for a map exit
   - `P` for the player’s starting position.
 
-Here is a simple valid map:
+This map (bigmap.ber):
 ```
-1111111111111
-10010000000C1
-1000011111001
-1P0011E000001
-1111111111111
+111111111111111111111111111111111111111
+1000E000000000000000000010000000000E001
+10000000000000000000000010C000000000001
+1000000000000000000000001C0C00000C00001
+100C0C000000000000000000111111000000001
+10CCCC000000000000000000000000000000001
+1111111100000000E0000000000000000000001
+100000000000000000000000000000C00000001
+100000000000000000111110000000000000001
+1000000000C0000000111000000000000000001
+1C00000000000000001110000000CP0000000C1
+100C000000000111111111111000000000000C1
+10C00E000000000000000000000000000000CE1
+111111111111111111111111111111111111111
 ```
+
+Will look like this (I chose Puck from Berserk as the main character and some cute snails to collect (๑•͈ᴗ•͈)):
+<img src="./.screenshots/bigmap.png">
 
 - The map must contain 1 exit, at least 1 collectible, and 1 starting position to be valid.
 - If the map can't contain duplicate characters (exit/start).
 - The map must be rectangular.
 - The map must be closed/surrounded by walls. 
 - The character must have a valid path to escape.
-
-Another example of a minimal `.ber` map:
-
-```
-1111111111111111111111111111111111
-1E0000000000000C00000C000000000001
-1010010100100000101001000000010101
-1010010010101010001001000000010101
-1P0000000C00C0000000000000000000C1
-1111111111111111111111111111111111
-```
